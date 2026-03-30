@@ -8,29 +8,90 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
   {%- if settings.favicon != blank -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
   {%- endif -%}
-  <title>{{ page_title }}{%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}{%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}</title>
-  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
   <meta property="og:site_name" content="{{ shop.name }}">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:title" content="{{ page_title }}">
+
   {{ content_for_header }}
+
   {{ 'glowingincoach.css' | asset_url | stylesheet_tag }}
 </head>
+
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
 
-  <div class="gic-loader" id="gic-loader">
+  <!-- LOADER -->
+  <div id="gic-loader" style="
+    position:fixed;inset:0;
+    background:#1C100A;
+    z-index:99999;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    transition:opacity 0.6s ease, visibility 0.6s ease;
+  ">
     {%- if settings.logo != blank -%}
-      <img src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" class="loader-logo">
+      <img src="{{ settings.logo | image_url: width: 280 }}" alt="{{ shop.name }}" style="width:160px;height:auto;filter:drop-shadow(0 0 24px rgba(201,168,76,0.5));">
     {%- else -%}
-      <div style="font-size:3rem;">👜</div>
+      <div style="font-size:4rem;">👜</div>
     {%- endif -%}
-    <div class="loader-text">{{ shop.name }}</div>
-    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:0.85rem;letter-spacing:0.35em;text-transform:uppercase;margin-top:20px;background:linear-gradient(135deg,#C9A84C,#F0D080);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+      {{ shop.name }}
+    </div>
+    <div style="width:140px;height:2px;background:rgba(201,168,76,0.15);border-radius:2px;margin-top:16px;overflow:hidden;">
+      <div id="loader-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#F0D080);border-radius:2px;transition:width 1.8s ease;"></div>
+    </div>
   </div>
+
+  <!-- DISMISS LOADER — inline script, runs immediately -->
+  <script>
+    // Start progress bar
+    setTimeout(function() {
+      var bar = document.getElementById('loader-bar');
+      if (bar) bar.style.width = '100%';
+    }, 50);
+
+    // Hide loader after animation completes
+    function hideLoader() {
+      var loader = document.getElementById('gic-loader');
+      if (!loader) return;
+      loader.style.opacity = '0';
+      loader.style.visibility = 'hidden';
+      loader.style.pointerEvents = 'none';
+      setTimeout(function() { loader.style.display = 'none'; }, 650);
+    }
+
+    // Hide after 2 seconds no matter what
+    setTimeout(hideLoader, 2000);
+
+    // Also hide as soon as page is interactive
+    if (document.readyState === 'complete') {
+      setTimeout(hideLoader, 1800);
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(hideLoader, 300);
+      });
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(hideLoader, 1800);
+      });
+    }
+  </script>
 
   {% section 'header' %}
 
@@ -39,6 +100,8 @@
   </main>
 
   {% section 'footer' %}
+
   {{ 'glowingincoach.js' | asset_url | script_tag }}
+
 </body>
 </html>
