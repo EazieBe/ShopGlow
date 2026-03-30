@@ -1,49 +1,65 @@
-<section class="gic-hero">
-  <span class="sparkle sp1">✨</span>
-  <span class="sparkle sp2">💫</span>
-  <span class="sparkle sp3">⭐</span>
+<section class="gic-hero" id="gic-hero">
+  <div class="hero-ambient"></div>
 
   <div class="hero-left">
-    <div class="hero-badge">✨ {{ section.settings.badge_text }}</div>
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      {{ section.settings.badge_text }}
+    </div>
 
     <h1 class="hero-title">
       {{ section.settings.heading_line1 }}<br>
       {{ section.settings.heading_line2 }}<br>
       {{ section.settings.heading_line3 }}<br>
-      <span class="grad">{{ section.settings.heading_glow }}</span>
+      <span class="hero-title-glow">{{ section.settings.heading_glow }}</span>
     </h1>
 
-    <p class="hero-sub">{{ section.settings.subheading }}</p>
+    <p class="hero-sub">{{ section.settings.subtext }}</p>
 
-    <div class="hero-btns">
-      <a href="{{ section.settings.primary_btn_url }}" class="btn-primary">{{ section.settings.primary_btn_text }}</a>
-      <a href="{{ section.settings.secondary_btn_url }}" class="btn-outline">{{ section.settings.secondary_btn_text }}</a>
+    <div class="hero-ctas">
+      <a href="{{ section.settings.btn1_url | default: routes.collections_url }}" class="btn-gold">
+        {{ section.settings.btn1_text }}
+      </a>
+      <a href="{{ section.settings.btn2_url | default: 'https://poshmark.com/closet/glowingincoach' }}" class="btn-ghost" target="_blank" rel="noopener">
+        {{ section.settings.btn2_text }}
+      </a>
     </div>
 
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">{{ section.settings.stat1_num }}</div><div class="stat-label">{{ section.settings.stat1_label }}</div></div>
-      <div class="stat"><div class="stat-num">{{ section.settings.stat2_num }}</div><div class="stat-label">{{ section.settings.stat2_label }}</div></div>
-      <div class="stat"><div class="stat-num">{{ section.settings.stat3_num }}</div><div class="stat-label">{{ section.settings.stat3_label }}</div></div>
-      <div class="stat"><div class="stat-num">{{ section.settings.stat4_num }}</div><div class="stat-label">{{ section.settings.stat4_label }}</div></div>
+    <div class="hero-proof">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stat' -%}
+          <div class="proof-stat" {{ block.shopify_attributes }}>
+            <div class="proof-num">{{ block.settings.number }}</div>
+            <div class="proof-label">{{ block.settings.label }}</div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 
   <div class="hero-right">
-    <div class="hero-logo-showcase">
-      <div class="hero-logo-bg">
-        {%- if section.settings.hero_image != blank -%}
-          <img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="{{ shop.name }}" class="hero-logo-img">
-        {%- else -%}
-          <span style="font-size:6rem;">👜</span>
-        {%- endif -%}
+    <div class="portrait-wrap">
+      <div class="portrait-halo"></div>
+      {%- if section.settings.portrait_image != blank -%}
+        <img
+          src="{{ section.settings.portrait_image | image_url: width: 900 }}"
+          alt="{{ shop.name }}"
+          class="portrait-img"
+          loading="eager">
+      {%- else -%}
+        <div style="width:420px;height:420px;display:flex;align-items:center;justify-content:center;font-size:10rem;">👜</div>
+      {%- endif -%}
+      <div class="proof-chip c1">
+        <div class="chip-ico">✅</div>
+        <div><div class="chip-label">Authenticated</div><div class="chip-val">Vintage Coach</div></div>
       </div>
-      <div class="float-chip tl">
-        <div class="chip-icon">✅</div>
-        <div><div class="chip-top">Authenticated</div><div class="chip-main">Vintage Coach</div></div>
+      <div class="proof-chip c2">
+        <div class="chip-ico">🚚</div>
+        <div><div class="chip-label">Free Shipping</div><div class="chip-val">Orders $75+</div></div>
       </div>
-      <div class="float-chip br">
-        <div class="chip-icon">🚚</div>
-        <div><div class="chip-top">Free Shipping</div><div class="chip-main">Orders $75+</div></div>
+      <div class="proof-chip c3">
+        <div class="chip-ico">⭐</div>
+        <div><div class="chip-label">Posh Ambassador</div><div class="chip-val">Top Seller</div></div>
       </div>
     </div>
   </div>
@@ -51,28 +67,38 @@
 
 {% schema %}
 {
-  "name": "Hero Banner",
+  "name": "Hero",
   "settings": [
-    { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "Posh Ambassador · 16.5K Followers" },
-    { "type": "text", "id": "heading_line1", "label": "Heading Line 1", "default": "Vintage Coach &" },
-    { "type": "text", "id": "heading_line2", "label": "Heading Line 2", "default": "Fashion Finds" },
-    { "type": "text", "id": "heading_line3", "label": "Heading Line 3", "default": "that make you" },
-    { "type": "text", "id": "heading_glow", "label": "Glow Word", "default": "Glow." },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love." },
-    { "type": "text", "id": "primary_btn_text", "label": "Primary Button Text", "default": "Shop Direct 🛍" },
-    { "type": "url", "id": "primary_btn_url", "label": "Primary Button URL" },
-    { "type": "text", "id": "secondary_btn_text", "label": "Secondary Button Text", "default": "Browse Poshmark" },
-    { "type": "url", "id": "secondary_btn_url", "label": "Secondary Button URL" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero Image (Logo)" },
-    { "type": "text", "id": "stat1_num", "label": "Stat 1 Number", "default": "246+" },
-    { "type": "text", "id": "stat1_label", "label": "Stat 1 Label", "default": "Listings" },
-    { "type": "text", "id": "stat2_num", "label": "Stat 2 Number", "default": "16.5K" },
-    { "type": "text", "id": "stat2_label", "label": "Stat 2 Label", "default": "Followers" },
-    { "type": "text", "id": "stat3_num", "label": "Stat 3 Number", "default": "17.8K" },
-    { "type": "text", "id": "stat3_label", "label": "Stat 3 Label", "default": "Shares" },
-    { "type": "text", "id": "stat4_num", "label": "Stat 4 Number", "default": "5★" },
-    { "type": "text", "id": "stat4_label", "label": "Stat 4 Label", "default": "Rated" }
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "✨ Posh Ambassador · 16.5K Followers" },
+    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Vintage Coach &" },
+    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "Fashion Finds" },
+    { "type": "text", "id": "heading_line3", "label": "Heading line 3", "default": "that make you" },
+    { "type": "text", "id": "heading_glow", "label": "Glowing word", "default": "Glow." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love by Glo. Authenticated. Affordable. Iconic." },
+    { "type": "text", "id": "btn1_text", "label": "Button 1 text", "default": "Shop Direct 🛍" },
+    { "type": "url", "id": "btn1_url", "label": "Button 1 URL" },
+    { "type": "text", "id": "btn2_text", "label": "Button 2 text", "default": "Browse Poshmark" },
+    { "type": "url", "id": "btn2_url", "label": "Button 2 URL" },
+    { "type": "image_picker", "id": "portrait_image", "label": "Hero portrait image", "info": "Your portrait logo — shows on the right side of the hero" }
   ],
-  "presets": [{ "name": "Hero Banner" }]
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "246+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Listings" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Hero",
+    "blocks": [
+      { "type": "stat", "settings": { "number": "246+", "label": "Listings" } },
+      { "type": "stat", "settings": { "number": "16.5K", "label": "Followers" } },
+      { "type": "stat", "settings": { "number": "17.8K", "label": "Shares" } },
+      { "type": "stat", "settings": { "number": "5★", "label": "Rated" } }
+    ]
+  }]
 }
 {% endschema %}
