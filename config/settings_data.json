@@ -41,7 +41,7 @@
           "btn1_text": "Shop Direct 🛍",
           "btn1_url": "",
           "btn2_text": "Browse Poshmark",
-          "btn2_url": "",
+          "btn2_url": "https://poshmark.com/closet/glowingincoach",
           "portrait_image": "shopify://shop_images/GlowingInCoach-logo-transparent.png"
         }
       },
