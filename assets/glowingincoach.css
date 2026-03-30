@@ -426,8 +426,129 @@ ul{list-style:none;}
   .insta-grid{grid-template-columns:repeat(2,1fr);}
   .gic-trust{display:none;}
 }
-.gic-nav, #gic-nav { background: rgba(255,249,245,0.97) !important; }
-.gic-announcement { background: linear-gradient(135deg,#C9A84C,#F0D080) !important; color: #2A1A0E !important; }
-.nav-logo img { height: 52px !important; max-width: 200px !important; width: auto !important; }
-body { background: #FFF9F5 !important; }
-.shopify-section { margin: 0 !important; }
+
+/* ================================================================
+   GLOWINGINCOACH LIVE FIXES — based on actual site review
+   ================================================================ */
+
+/* ── HERO TITLE GLOW — fix teal, make proper holographic ──────── */
+.hero-title-glow {
+  display: block !important;
+  font-style: italic !important;
+  background: linear-gradient(135deg, #E8A0C8, #D4A040, #90D8C0, #90C8E8, #C0A0E8, #E8A0C8) !important;
+  background-size: 300% 100% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: shimmer 5s ease infinite !important;
+  color: transparent !important;
+}
+
+/* ── PROOF STATS — fix floating star/emoji ────────────────────── */
+.hero-proof {
+  display: flex !important;
+  gap: 40px !important;
+  margin-top: 52px !important;
+  padding-top: 36px !important;
+  border-top: 1px solid rgba(201,168,76,0.15) !important;
+  flex-wrap: wrap !important;
+}
+.proof-stat {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+.proof-num {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 2.2rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+  background: linear-gradient(135deg, #C9A84C, #F0D080) !important;
+  background-size: 200% 100% !important;
+  animation: goldShift 3s ease infinite !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+.proof-label {
+  font-size: 0.68rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: #B8A090 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #B8A090 !important;
+}
+
+/* ── BOTH HERO BUTTONS ALWAYS SHOW ───────────────────────────── */
+.hero-ctas {
+  display: flex !important;
+  gap: 14px !important;
+  flex-wrap: wrap !important;
+}
+.btn-gold, .btn-ghost {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* ── HERO RIGHT — always show, fill space ─────────────────────── */
+.hero-right {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.portrait-wrap {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.portrait-img {
+  width: min(460px, 90%) !important;
+  height: auto !important;
+  position: relative !important;
+  z-index: 2 !important;
+  animation: float 5s ease-in-out infinite !important;
+  filter: drop-shadow(0 16px 48px rgba(201,168,76,0.35)) drop-shadow(0 0 60px rgba(255,179,217,0.25)) !important;
+}
+
+/* ── NAV — cream, never purple ────────────────────────────────── */
+.gic-nav, #gic-nav {
+  background: rgba(255,249,245,0.97) !important;
+  background-color: #FFF9F5 !important;
+  border-bottom: 1px solid rgba(201,168,76,0.18) !important;
+}
+
+/* ── ANNOUNCEMENT BAR — gold always ──────────────────────────── */
+.gic-announcement, #gic-ann, .announcement-bar {
+  background: linear-gradient(90deg, #C9A84C, #F0D080, #FFE566, #F0D080, #C9A84C) !important;
+  background-size: 300% 100% !important;
+  animation: goldShift 5s ease infinite !important;
+  color: #2A1A0E !important;
+}
+.gic-announcement *, #gic-ann *, .announcement-bar * {
+  color: #2A1A0E !important;
+  -webkit-text-fill-color: #2A1A0E !important;
+}
+
+/* ── BODY / SECTIONS ──────────────────────────────────────────── */
+html, body { background: #FFF9F5 !important; }
+.shopify-section { margin: 0 !important; padding: 0 !important; }
+
+/* ── LOGO ─────────────────────────────────────────────────────── */
+.nav-logo img {
+  height: 54px !important;
+  max-height: 54px !important;
+  width: auto !important;
+  max-width: 200px !important;
+  object-fit: contain !important;
+}
+
+/* ── NAV LINKS ────────────────────────────────────────────────── */
+.nav-link { color: #6B4F3A !important; }
+.nav-link:hover, .nav-link.active { color: #2A1A0E !important; background: rgba(201,168,76,0.1) !important; }
+.nav-shop-btn { background: linear-gradient(135deg, #C9A84C, #F0D080) !important; color: #2A1A0E !important; }
+
+/* ── CHIP LABELS ──────────────────────────────────────────────── */
+.chip-label { -webkit-text-fill-color: #B8A090 !important; color: #B8A090 !important; }
+.chip-val { -webkit-text-fill-color: #2A1A0E !important; color: #2A1A0E !important; }
