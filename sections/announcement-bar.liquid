@@ -1,6 +1,10 @@
-<div class="announcement-bar" style="background: linear-gradient(90deg,#4A148C,#E91E8C,#7B1FA2,#E91E8C,#4A148C); background-size:300% 100%; animation: gradShift 6s ease infinite; color:white; text-align:center; padding:10px 20px; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; font-family:'Nunito',sans-serif;">
-  {{ section.settings.text }}
+{%- if section.settings.text != blank -%}
+<div class="gic-announcement" id="gic-ann">
+  <span>{{ section.settings.text }}</span>
+  <button class="announcement-close" onclick="document.getElementById('gic-ann').style.cssText='height:0;padding:0;overflow:hidden;opacity:0;transition:all .3s';sessionStorage.setItem('gic-ann','1');" aria-label="Close">✕</button>
 </div>
+<script>if(sessionStorage.getItem('gic-ann'))document.getElementById('gic-ann').style.display='none';</script>
+{%- endif -%}
 
 {% schema %}
 {
