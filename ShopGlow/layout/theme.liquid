@@ -17,7 +17,29 @@
   <meta property="og:site_name" content="{{ shop.name }}">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:title" content="{{ page_title }}">
-  {{ content_for_header }}
+  <!-- GlowingInCoach Color Override — kills Shopify default purple -->
+  <style>
+    :root {
+      --color-base-background-1: 255, 249, 245;
+      --color-base-background-2: 255, 240, 230;
+      --color-base-text: 42, 26, 14;
+      --color-base-accent-1: 201, 168, 76;
+      --color-base-accent-2: 240, 208, 128;
+      --color-button: 201, 168, 76;
+      --color-button-text: 42, 26, 14;
+    }
+    /* Pre-load: hide body until our CSS loads to prevent purple flash */
+    body { opacity: 0; transition: opacity 0.1s; }
+  </style>
+  {{ content_for_header }}  <!-- Post-load opacity restore -->
+  <style>
+    body { opacity: 1 !important; }
+    /* Force our nav background over any injected styles */
+    .gic-nav, header.gic-nav {
+      background: rgba(255,249,245,0.97) !important;
+    }
+  </style>
+
   {{ 'glowingincoach.css' | asset_url | stylesheet_tag }}
 </head>
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">

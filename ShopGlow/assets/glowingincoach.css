@@ -426,3 +426,116 @@ ul{list-style:none;}
   .insta-grid{grid-template-columns:repeat(2,1fr);}
   .gic-trust{display:none;}
 }
+
+
+
+
+/* ============================================================
+   SHOPIFY OVERRIDE FIXES v2 — Kills purple, fixes spacing/logo
+   ============================================================ */
+
+/* 1. KILL THE PURPLE — Override every Shopify color variable */
+:root,
+[style*="--color"],
+.shopify-section,
+#shopify-section-header {
+  --color-base-background-1: 255, 249, 245 !important;
+  --color-base-background-2: 255, 240, 230 !important;
+  --color-base-surface-1: 255, 249, 245 !important;
+  --color-base-text: 42, 26, 14 !important;
+  --color-base-accent-1: 201, 168, 76 !important;
+  --color-base-accent-2: 240, 208, 128 !important;
+  --color-button: 201, 168, 76 !important;
+  --color-button-text: 42, 26, 14 !important;
+  --color-secondary-button: 42, 26, 14 !important;
+  --color-secondary-button-text: 255, 249, 245 !important;
+  --gradient-base-background-1: transparent !important;
+  --gradient-base-accent-1: transparent !important;
+}
+
+/* 2. NAV BACKGROUND — force cream, never purple */
+.gic-nav,
+#gic-nav,
+nav.gic-nav,
+.section-header,
+.shopify-section-header > * {
+  background: rgba(255, 249, 245, 0.97) !important;
+  background-color: rgba(255, 249, 245, 0.97) !important;
+}
+
+/* 3. ANNOUNCEMENT BAR — force gold gradient */
+.gic-announcement {
+  background: linear-gradient(135deg, #C9A84C, #F0D080, #C9A84C, #FFE566) !important;
+  background-size: 300% 100% !important;
+  animation: goldShift 5s ease infinite !important;
+  color: #2A1A0E !important;
+}
+
+/* 4. LOGO SIZING — prevent blown-out logo */
+.nav-logo img {
+  height: 52px !important;
+  max-height: 52px !important;
+  width: auto !important;
+  max-width: 200px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+.nav-logo {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+}
+
+/* 5. REMOVE EXTRA SPACING between sections */
+.shopify-section {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* But keep our own section padding intact */
+.gic-hero { padding-top: 0 !important; }
+main#MainContent { padding: 0 !important; margin: 0 !important; }
+
+/* 6. FIX BODY */
+body {
+  background: #FFF9F5 !important;
+  background-color: #FFF9F5 !important;
+}
+
+/* 7. NAV LINK COLORS — no purple */
+.nav-link,
+.nav-links a,
+.nav-links li a {
+  color: #6B4F3A !important;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #2A1A0E !important;
+  background: rgba(201, 168, 76, 0.1) !important;
+}
+.nav-link.sale { color: #8B6914 !important; }
+
+/* 8. SHOP NOW BUTTON — force gold */
+.nav-shop-btn {
+  background: linear-gradient(135deg, #C9A84C, #F0D080, #C9A84C) !important;
+  background-size: 200% 100% !important;
+  color: #2A1A0E !important;
+}
+
+/* 9. FOOTER LOGO SIZING */
+.footer-brand-logo {
+  width: 160px !important;
+  max-width: 160px !important;
+  height: auto !important;
+}
+
+/* 10. LOADER LOGO */
+.gic-loader img.loader-logo {
+  width: 130px !important;
+  max-width: 130px !important;
+  height: auto !important;
+}
+
+/* 11. Kill any Shopify-injected link colors */
+a { color: inherit; }
+a:visited { color: inherit; }
