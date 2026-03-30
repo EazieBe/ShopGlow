@@ -9,46 +9,50 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   {%- if settings.favicon != blank -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
   {%- endif -%}
-  <title>{{ page_title }}{%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}{%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}</title>
-  {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
   <meta property="og:site_name" content="{{ shop.name }}">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:title" content="{{ page_title }}">
-  <!-- GlowingInCoach Color Override — kills Shopify default purple -->
-  <style>
-    :root {
-      --color-base-background-1: 255, 249, 245;
-      --color-base-background-2: 255, 240, 230;
-      --color-base-text: 42, 26, 14;
-      --color-base-accent-1: 201, 168, 76;
-      --color-base-accent-2: 240, 208, 128;
-      --color-button: 201, 168, 76;
-      --color-button-text: 42, 26, 14;
-    }
-    /* Pre-load: hide body until our CSS loads to prevent purple flash */
-    body { opacity: 0; transition: opacity 0.1s; }
-  </style>
-  {{ content_for_header }}  <!-- Post-load opacity restore -->
-  <style>
-    body { opacity: 1 !important; }
-    /* Force our nav background over any injected styles */
-    .gic-nav, header.gic-nav {
-      background: rgba(255,249,245,0.97) !important;
-    }
-  </style>
+  {%- if page_image -%}
+    <meta property="og:image" content="{{ page_image | image_url: width: 1200 }}">
+  {%- endif -%}
+
+  {{ content_for_header }}
 
   {{ 'glowingincoach.css' | asset_url | stylesheet_tag }}
+
+  <style>
+    /* CRITICAL OVERRIDES — must be inline to beat content_for_header injections */
+    *:where(header:not(.gic-nav)):not(.gic-nav *) { display: none !important; }
+    .gic-loader, .gic-nav, .gic-announcement, #MainContent, .gic-footer,
+    .gic-hero, .gic-marquee, .gic-trust, .gic-collections, .gic-products,
+    .gic-featured-banner, .gic-ambassador, .gic-glo-edit, .gic-instagram,
+    .gic-email, footer.gic-footer, #gic-loader { display: revert !important; }
+    body { background: #FFF9F5 !important; opacity: 1 !important; }
+  </style>
 </head>
+
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
 
   <div class="gic-loader" id="gic-loader">
     {%- if settings.logo != blank -%}
       <img src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" class="loader-logo">
     {%- else -%}
-      <div style="font-size:3rem;">👜</div>
+      <div style="font-size:3rem; animation: float 2s ease-in-out infinite;">👜</div>
     {%- endif -%}
     <div class="loader-text">{{ shop.name }}</div>
     <div class="loader-bar"><div class="loader-fill"></div></div>
@@ -61,6 +65,7 @@
   </main>
 
   {% section 'footer' %}
+
   {{ 'glowingincoach.js' | asset_url | script_tag }}
 </body>
 </html>

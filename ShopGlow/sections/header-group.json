@@ -1,0 +1,17 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {
+        "announcement_text": "\u2728 Posh Ambassador \u00b7 Free Shipping $75+ \u00b7 Authenticated Vintage Coach \u00b7 New Drops Weekly \u2728",
+        "logo_height": 52,
+        "menu": "main-menu"
+      }
+    }
+  },
+  "order": [
+    "header"
+  ]
+}
