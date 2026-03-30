@@ -426,3 +426,8 @@ ul{list-style:none;}
   .insta-grid{grid-template-columns:repeat(2,1fr);}
   .gic-trust{display:none;}
 }
+.gic-nav, #gic-nav { background: rgba(255,249,245,0.97) !important; }
+.gic-announcement { background: linear-gradient(135deg,#C9A84C,#F0D080) !important; color: #2A1A0E !important; }
+.nav-logo img { height: 52px !important; max-width: 200px !important; width: auto !important; }
+body { background: #FFF9F5 !important; }
+.shopify-section { margin: 0 !important; }
