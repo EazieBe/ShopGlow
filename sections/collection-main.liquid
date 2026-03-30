@@ -1,0 +1,89 @@
+<section class="gic-collection-page">
+  <div class="collection-header">
+    <div class="eyebrow">{{ collection.title }}</div>
+    <h1 class="sec-title">{{ collection.title | split: ' ' | first }} <em>{{ collection.title | split: ' ' | last }}</em></h1>
+    {%- if collection.description != blank -%}
+      <p class="collection-desc">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="collection-toolbar">
+    <span class="product-count">{{ collection.products_count }} items</span>
+    <div class="sort-wrap">
+      <label for="sort-select">Sort by</label>
+      <select id="sort-select" onchange="location = this.value" class="sort-select">
+        <option value="{{ collection.url }}?sort_by=manual" {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+        <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+        <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+        <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest First</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="prod-grid">
+    {%- for product in collection.products -%}
+      <div class="prod-card">
+        <a href="{{ product.url }}" class="prod-img-link">
+          <div class="prod-img">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+            {%- else -%}
+              <span style="font-size:4rem;">👜</span>
+            {%- endif -%}
+            {%- if product.tags contains 'vintage' or product.tags contains 'resale' -%}
+              <span class="pbadge b-vin">Vintage</span>
+            {%- elsif product.tags contains 'glo-pick' -%}
+              <span class="pbadge b-glo">Glo's Pick ✨</span>
+            {%- else -%}
+              <span class="pbadge b-new">New</span>
+            {%- endif -%}
+            <button class="pwish" aria-label="Wishlist" onclick="event.preventDefault();">♡</button>
+          </div>
+        </a>
+        <div class="prod-info">
+          <div class="prod-brand">{{ product.vendor }}</div>
+          <a href="{{ product.url }}" class="prod-name-link">
+            <div class="prod-name">{{ product.title }}</div>
+          </a>
+          <div class="prod-footer">
+            <div class="price-group">
+              <span class="price">{{ product.price | money }}</span>
+              {%- if product.compare_at_price > product.price -%}
+                <span class="price-was">{{ product.compare_at_price | money }}</span>
+              {%- endif -%}
+            </div>
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="add-btn">Add ✦</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if paginate.pages > 1 -%}
+    <div class="pagination">
+      {%- if paginate.previous -%}
+        <a href="{{ paginate.previous.url }}" class="page-btn">← Prev</a>
+      {%- endif -%}
+      {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+          <a href="{{ part.url }}" class="page-btn">{{ part.title }}</a>
+        {%- else -%}
+          <span class="page-btn active">{{ part.title }}</span>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if paginate.next -%}
+        <a href="{{ paginate.next.url }}" class="page-btn">Next →</a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Collection Main",
+  "presets": [{ "name": "Collection Main" }]
+}
+{% endschema %}

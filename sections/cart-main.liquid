@@ -1,0 +1,78 @@
+<section class="gic-cart-page">
+  <div class="sec-hdr">
+    <div class="eyebrow">Your Selections</div>
+    <h1 class="sec-title">Your <em>Cart</em></h1>
+  </div>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-empty">
+      <div style="font-size:4rem;margin-bottom:20px;">🛍</div>
+      <h2 style="font-family:'Playfair Display',serif;color:var(--text-dark);margin-bottom:12px;">Your cart is empty</h2>
+      <p style="color:var(--text-mid);margin-bottom:28px;">Time to find your glow ✨</p>
+      <a href="{{ routes.collections_url }}" class="btn-primary">Shop Now</a>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-form">
+      <div class="cart-grid">
+        <div class="cart-items">
+          {%- for item in cart.items -%}
+            <div class="cart-item">
+              <a href="{{ item.url }}">
+                <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" class="cart-item-img">
+              </a>
+              <div class="cart-item-info">
+                <div class="prod-brand">{{ item.vendor }}</div>
+                <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <div class="cart-item-variant">{{ item.variant.title }}</div>
+                {%- endunless -%}
+                <div class="cart-item-actions">
+                  <div class="qty-wrap">
+                    <button type="button" class="qty-btn" onclick="updateQty('{{ item.key }}', {{ item.quantity | minus: 1 }})">−</button>
+                    <span class="qty-num">{{ item.quantity }}</span>
+                    <button type="button" class="qty-btn" onclick="updateQty('{{ item.key }}', {{ item.quantity | plus: 1 }})">+</button>
+                  </div>
+                  <a href="{{ item.url_to_remove }}" class="remove-btn">Remove</a>
+                </div>
+              </div>
+              <div class="cart-item-price">{{ item.final_line_price | money }}</div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-card">
+            <h3 class="summary-title">Order Summary</h3>
+            <div class="summary-row"><span>Subtotal</span><span>{{ cart.total_price | money }}</span></div>
+            {%- if cart.total_price < 7500 -%}
+              <div class="summary-shipping-msg">Add {{ 7500 | minus: cart.total_price | money }} more for free shipping! 🚚</div>
+            {%- else -%}
+              <div class="summary-row" style="color:#E91E8C;font-weight:700;"><span>Shipping</span><span>FREE ✨</span></div>
+            {%- endif -%}
+            <div class="summary-total"><span>Total</span><span>{{ cart.total_price | money }}</span></div>
+            <button type="submit" name="checkout" class="btn-primary btn-full" style="margin-top:20px;">Checkout Securely 🔒</button>
+            <a href="{{ routes.collections_url }}" class="continue-shopping">← Continue Shopping</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  {%- endif -%}
+</section>
+
+<script>
+function updateQty(key, qty) {
+  if (qty < 1) qty = 0;
+  fetch('/cart/change.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: key, quantity: qty })
+  }).then(() => location.reload());
+}
+</script>
+
+{% schema %}
+{
+  "name": "Cart Main",
+  "presets": [{ "name": "Cart Main" }]
+}
+{% endschema %}

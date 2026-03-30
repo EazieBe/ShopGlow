@@ -1,0 +1,33 @@
+<section class="gic-glo-edit">
+  <div class="glo-inner">
+    <div class="glo-text">
+      <div class="glo-ey">{{ section.settings.eyebrow }}</div>
+      <h2 class="glo-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
+      <p class="glo-body">{{ section.settings.body }}</p>
+      <a href="{{ section.settings.btn_url }}" class="btn-primary">{{ section.settings.btn_text }}</a>
+    </div>
+    <div class="glo-img-box">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 600 }}" alt="The Glo Edit">
+      {%- else -%}
+        <span style="font-size:6rem;">✨</span>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Glo Edit Feature",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "✨ Personally curated by Glo" },
+    { "type": "text", "id": "title", "label": "Title", "default": "The" },
+    { "type": "text", "id": "title_em", "label": "Title Emphasis", "default": "Glo Edit — my favorites, right now." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Every piece in this section is hand-picked by me. These are the bags, outfits, and accessories I'm personally obsessed with — updated every week." },
+    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "Shop The Glo Edit ✨" },
+    { "type": "url", "id": "btn_url", "label": "Button URL" },
+    { "type": "image_picker", "id": "image", "label": "Feature Image" }
+  ],
+  "presets": [{ "name": "Glo Edit Feature" }]
+}
+{% endschema %}

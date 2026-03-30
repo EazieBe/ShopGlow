@@ -1,0 +1,32 @@
+<div class="gic-featured-banner">
+  <div class="banner-holo-bg"></div>
+  <div class="banner-content">
+    <div class="banner-left">
+      <div class="banner-tag">✦ {{ section.settings.tag }}</div>
+      <h2 class="banner-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
+      <p class="banner-sub">{{ section.settings.subtitle }}</p>
+      <a href="{{ section.settings.btn_url }}" class="btn-gold">{{ section.settings.btn_text }}</a>
+    </div>
+    {%- if section.settings.logo != blank -%}
+      <div class="banner-right">
+        <img src="{{ section.settings.logo | image_url: width: 400 }}" alt="{{ shop.name }}" class="banner-logo">
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Banner",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Tag", "default": "Posh Ambassador" },
+    { "type": "text", "id": "title", "label": "Title", "default": "New arrivals" },
+    { "type": "text", "id": "title_em", "label": "Title Emphasis", "default": "every week." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle", "default": "Vintage Coach bags, designer finds & boutique pieces dropped fresh. Be the first to shop." },
+    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "Shop New Arrivals ✨" },
+    { "type": "url", "id": "btn_url", "label": "Button URL" },
+    { "type": "image_picker", "id": "logo", "label": "Logo Image" }
+  ],
+  "presets": [{ "name": "Featured Banner" }]
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+<section class="gic-hero">
+  <span class="sparkle sp1">✨</span>
+  <span class="sparkle sp2">💫</span>
+  <span class="sparkle sp3">⭐</span>
+
+  <div class="hero-left">
+    <div class="hero-badge">✨ {{ section.settings.badge_text }}</div>
+
+    <h1 class="hero-title">
+      {{ section.settings.heading_line1 }}<br>
+      {{ section.settings.heading_line2 }}<br>
+      {{ section.settings.heading_line3 }}<br>
+      <span class="grad">{{ section.settings.heading_glow }}</span>
+    </h1>
+
+    <p class="hero-sub">{{ section.settings.subheading }}</p>
+
+    <div class="hero-btns">
+      <a href="{{ section.settings.primary_btn_url }}" class="btn-primary">{{ section.settings.primary_btn_text }}</a>
+      <a href="{{ section.settings.secondary_btn_url }}" class="btn-outline">{{ section.settings.secondary_btn_text }}</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">{{ section.settings.stat1_num }}</div><div class="stat-label">{{ section.settings.stat1_label }}</div></div>
+      <div class="stat"><div class="stat-num">{{ section.settings.stat2_num }}</div><div class="stat-label">{{ section.settings.stat2_label }}</div></div>
+      <div class="stat"><div class="stat-num">{{ section.settings.stat3_num }}</div><div class="stat-label">{{ section.settings.stat3_label }}</div></div>
+      <div class="stat"><div class="stat-num">{{ section.settings.stat4_num }}</div><div class="stat-label">{{ section.settings.stat4_label }}</div></div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-logo-showcase">
+      <div class="hero-logo-bg">
+        {%- if section.settings.hero_image != blank -%}
+          <img src="{{ section.settings.hero_image | image_url: width: 700 }}" alt="{{ shop.name }}" class="hero-logo-img">
+        {%- else -%}
+          <span style="font-size:6rem;">👜</span>
+        {%- endif -%}
+      </div>
+      <div class="float-chip tl">
+        <div class="chip-icon">✅</div>
+        <div><div class="chip-top">Authenticated</div><div class="chip-main">Vintage Coach</div></div>
+      </div>
+      <div class="float-chip br">
+        <div class="chip-icon">🚚</div>
+        <div><div class="chip-top">Free Shipping</div><div class="chip-main">Orders $75+</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "Posh Ambassador · 16.5K Followers" },
+    { "type": "text", "id": "heading_line1", "label": "Heading Line 1", "default": "Vintage Coach &" },
+    { "type": "text", "id": "heading_line2", "label": "Heading Line 2", "default": "Fashion Finds" },
+    { "type": "text", "id": "heading_line3", "label": "Heading Line 3", "default": "that make you" },
+    { "type": "text", "id": "heading_glow", "label": "Glow Word", "default": "Glow." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love." },
+    { "type": "text", "id": "primary_btn_text", "label": "Primary Button Text", "default": "Shop Direct 🛍" },
+    { "type": "url", "id": "primary_btn_url", "label": "Primary Button URL" },
+    { "type": "text", "id": "secondary_btn_text", "label": "Secondary Button Text", "default": "Browse Poshmark" },
+    { "type": "url", "id": "secondary_btn_url", "label": "Secondary Button URL" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero Image (Logo)" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 Number", "default": "246+" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 Label", "default": "Listings" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 Number", "default": "16.5K" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 Label", "default": "Followers" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 Number", "default": "17.8K" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 Label", "default": "Shares" },
+    { "type": "text", "id": "stat4_num", "label": "Stat 4 Number", "default": "5★" },
+    { "type": "text", "id": "stat4_label", "label": "Stat 4 Label", "default": "Rated" }
+  ],
+  "presets": [{ "name": "Hero Banner" }]
+}
+{% endschema %}

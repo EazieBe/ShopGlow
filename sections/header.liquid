@@ -1,0 +1,62 @@
+<header class="gic-nav">
+  <div class="nav-inner">
+
+    <a href="{{ routes.root_url }}" class="nav-logo">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" width="120" height="auto">
+      {%- else -%}
+        <span class="logo-text-fallback">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}" class="nav-link {% if link.active %}active{% endif %}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="nav-actions">
+      <a href="{{ routes.search_url }}" class="nav-icon" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="nav-icon cart-icon" aria-label="Cart" data-cart-toggle>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-badge">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+      <a href="{{ routes.collections_url }}" class="nav-btn">Shop Now ✨</a>
+    </div>
+
+    <button class="mobile-menu-btn" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('open')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu">
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}" class="mobile-link">{{ link.title }}</a>
+    {%- endfor -%}
+    <a href="{{ routes.cart_url }}" class="mobile-link">Cart ({{ cart.item_count }})</a>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    }
+  ],
+  "presets": [{ "name": "Header" }]
+}
+{% endschema %}

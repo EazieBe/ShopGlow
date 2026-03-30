@@ -1,0 +1,40 @@
+<div class="gic-marquee">
+  <div class="marquee-track">
+    {%- for i in (1..2) -%}
+      {%- for block in section.blocks -%}
+        <span class="marquee-item">{{ block.settings.text }}</span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Bar",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Vintage Coach Bags" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Bar",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Vintage Coach Bags" } },
+        { "type": "item", "settings": { "text": "Dooney & Bourke" } },
+        { "type": "item", "settings": { "text": "Michael Kors" } },
+        { "type": "item", "settings": { "text": "Patricia Nash" } },
+        { "type": "item", "settings": { "text": "Designer Resale" } },
+        { "type": "item", "settings": { "text": "Free Shipping $75+" } },
+        { "type": "item", "settings": { "text": "Posh Ambassador" } },
+        { "type": "item", "settings": { "text": "New Drops Weekly" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,61 @@
+<section class="gic-collections">
+  <div class="sec-hdr">
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="sec-title">{{ section.settings.title_plain }} <em>{{ section.settings.title_glow }}</em></h2>
+  </div>
+  <div class="col-grid">
+    {%- for block in section.blocks -%}
+      {%- assign col = collections[block.settings.collection] -%}
+      <a href="{{ col.url | default: '#' }}" class="col-card" {{ block.shopify_attributes }}>
+        <div class="col-bg" style="background: {{ block.settings.bg_gradient }};">
+          {%- if col.image -%}
+            <img src="{{ col.image | image_url: width: 600 }}" alt="{{ col.title }}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+          {%- else -%}
+            <span style="font-size:5rem;position:relative;z-index:1;">{{ block.settings.emoji }}</span>
+          {%- endif -%}
+        </div>
+        <div class="col-overlay"></div>
+        <div class="col-info">
+          <div class="col-name">{{ block.settings.label | default: col.title }}</div>
+          <div class="col-sub">{{ block.settings.sublabel }}</div>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow Text", "default": "Shop by Category" },
+    { "type": "text", "id": "title_plain", "label": "Title (plain)", "default": "Find Your" },
+    { "type": "text", "id": "title_glow", "label": "Title (gradient)", "default": "Glow" }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label Override" },
+        { "type": "text", "id": "sublabel", "label": "Sub Label", "default": "Shop Now" },
+        { "type": "text", "id": "emoji", "label": "Emoji (if no image)", "default": "👜" },
+        { "type": "text", "id": "bg_gradient", "label": "Background Gradient", "default": "linear-gradient(135deg,#FCE4EC,#F8BBD9)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Grid",
+      "blocks": [
+        { "type": "collection", "settings": { "label": "Vintage Coach", "sublabel": "Authenticated · All Eras", "emoji": "👜", "bg_gradient": "linear-gradient(135deg,#FCE4EC,#F8BBD9)" } },
+        { "type": "collection", "settings": { "label": "Designer Bags", "sublabel": "MK · D&B · Patricia Nash", "emoji": "👝", "bg_gradient": "linear-gradient(135deg,#EDE7F6,#CE93D8)" } },
+        { "type": "collection", "settings": { "label": "The Glo Edit", "sublabel": "Glo's personal picks", "emoji": "✨", "bg_gradient": "linear-gradient(135deg,#FFF8E1,#FFE082)" } },
+        { "type": "collection", "settings": { "label": "Fashion Finds", "sublabel": "Clothing · Shoes · Jewelry", "emoji": "👗", "bg_gradient": "linear-gradient(135deg,#E3F2FD,#90CAF9)" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

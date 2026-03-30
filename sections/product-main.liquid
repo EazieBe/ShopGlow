@@ -1,0 +1,62 @@
+<div class="gic-product-page">
+  <div class="product-gallery">
+    {%- for image in product.images -%}
+      <img src="{{ image | image_url: width: 800 }}" alt="{{ image.alt | escape }}" class="product-img-thumb {% if forloop.first %}active{% endif %}" loading="lazy">
+    {%- endfor -%}
+  </div>
+
+  <div class="product-details">
+    <div class="prod-brand">{{ product.vendor }}</div>
+    <h1 class="product-title">{{ product.title }}</h1>
+
+    <div class="product-price-row">
+      <span class="price-big">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="price-was">{{ product.compare_at_price | money }}</span>
+        <span class="price-save">Save {{ product.compare_at_price | minus: product.price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    <div class="product-description">{{ product.description }}</div>
+
+    {%- form 'product', product -%}
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <div class="variant-group">
+            <label class="variant-label">{{ option.name }}</label>
+            <div class="variant-options">
+              {%- for value in option.values -%}
+                <label class="variant-opt">
+                  <input type="radio" name="options[{{ option.name | escape }}]" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
+                  <span>{{ value }}</span>
+                </label>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+      <div class="product-actions">
+        <button type="submit" class="btn-primary btn-full" {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}Add to Cart 🛍{%- else -%}Sold Out{%- endif -%}
+        </button>
+      </div>
+    {%- endform -%}
+
+    <div class="product-trust">
+      <div class="trust-item">✅ Authenticated & verified</div>
+      <div class="trust-item">🚚 Free shipping on orders $75+</div>
+      <div class="trust-item">↩️ 14-day returns on new items</div>
+      <div class="trust-item">💜 Personally curated by Glo</div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Main",
+  "presets": [{ "name": "Product Main" }]
+}
+{% endschema %}
