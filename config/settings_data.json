@@ -22,37 +22,24 @@
         "type": "header",
         "settings": {
           "logo": "shopify://shop_images/GlowingInCoach-logo-transparent.png",
-          "menu": "main-menu"
-        }
-      },
-      "announcement-bar": {
-        "type": "announcement-bar",
-        "settings": {
-          "text": "✨ Posh Ambassador · Free Shipping $75+ · New Drops Weekly · Authenticated Vintage Coach ✨"
+          "logo_height": 52,
+          "menu": "main-menu",
+          "announcement_text": "✨ Posh Ambassador · Free Shipping $75+ · Authenticated Vintage Coach · New Drops Weekly ✨"
         }
       },
       "hero": {
         "type": "hero",
         "settings": {
-          "badge_text": "Posh Ambassador · 16.5K Followers",
+          "badge_text": "✨ Posh Ambassador · 16.5K Followers",
           "heading_line1": "Vintage Coach &",
           "heading_line2": "Fashion Finds",
           "heading_line3": "that make you",
           "heading_glow": "Glow.",
-          "subheading": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love.",
-          "primary_btn_text": "Shop Direct 🛍",
-          "primary_btn_url": "",
-          "secondary_btn_text": "Browse Poshmark",
-          "secondary_btn_url": "",
-          "hero_image": "shopify://shop_images/GlowingInCoach-logo-transparent.png",
-          "stat1_num": "246+",
-          "stat1_label": "Listings",
-          "stat2_num": "16.5K",
-          "stat2_label": "Followers",
-          "stat3_num": "17.8K",
-          "stat3_label": "Shares",
-          "stat4_num": "5★",
-          "stat4_label": "Rated"
+          "subtext": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love by Glo. Authenticated. Affordable. Iconic.",
+          "btn1_text": "Shop Direct 🛍",
+          "btn1_url": "",
+          "btn2_text": "Browse Poshmark",
+          "btn2_url": ""
         }
       },
       "marquee": {
@@ -110,10 +97,10 @@
       "glo-edit": {
         "type": "glo-edit",
         "settings": {
-          "eyebrow": "✨ Personally curated by Glo",
+          "eyebrow": "Personally curated by Glo",
           "title": "The",
           "title_em": "Glo Edit — my favorites, right now.",
-          "body": "Every piece in this section is hand-picked by me. These are the bags, outfits, and accessories I'm personally obsessed with — updated every week.",
+          "body": "Every piece in this section is hand-picked by me. These are the bags, outfits, and accessories I'm personally obsessed with — the ones I'd carry, wear, and gift. Updated every single week.",
           "btn_text": "Shop The Glo Edit ✨",
           "btn_url": ""
         }
