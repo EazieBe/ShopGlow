@@ -1,0 +1,69 @@
+<section class="gic-products">
+  <div class="sec-hdr">
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2 class="sec-title">{{ section.settings.title_plain }} <em>{{ section.settings.title_glow }}</em></h2>
+  </div>
+
+  <div class="prod-grid">
+    {%- assign featured = collections[section.settings.collection] -%}
+    {%- for product in featured.products limit: section.settings.products_to_show -%}
+      <div class="prod-card">
+        <a href="{{ product.url }}" class="prod-img-link">
+          <div class="prod-img">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title | escape }}" loading="lazy">
+            {%- else -%}
+              <span style="font-size:4rem;">👜</span>
+            {%- endif -%}
+
+            {%- if product.tags contains 'vintage' or product.tags contains 'resale' -%}
+              <span class="pbadge b-vin">Vintage</span>
+            {%- elsif product.tags contains 'glo-pick' -%}
+              <span class="pbadge b-glo">Glo's Pick ✨</span>
+            {%- else -%}
+              <span class="pbadge b-new">New</span>
+            {%- endif -%}
+
+            <button class="pwish" aria-label="Wishlist" onclick="event.preventDefault();">♡</button>
+          </div>
+        </a>
+        <div class="prod-info">
+          <div class="prod-brand">{{ product.vendor }}</div>
+          <a href="{{ product.url }}" class="prod-name-link">
+            <div class="prod-name">{{ product.title }}</div>
+          </a>
+          <div class="prod-footer">
+            <div class="price-group">
+              <span class="price">{{ product.price | money }}</span>
+              {%- if product.compare_at_price > product.price -%}
+                <span class="price-was">{{ product.compare_at_price | money }}</span>
+              {%- endif -%}
+            </div>
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="add-btn">Add ✦</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="view-all">
+    <a href="{{ routes.collections_url }}" class="btn-primary">View All Products ✨</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Fresh Drops" },
+    { "type": "text", "id": "title_plain", "label": "Title (plain)", "default": "Just" },
+    { "type": "text", "id": "title_glow", "label": "Title (gradient)", "default": "Arrived" },
+    { "type": "collection", "id": "collection", "label": "Collection to feature" },
+    { "type": "range", "id": "products_to_show", "min": 3, "max": 12, "step": 3, "label": "Products to show", "default": 6 }
+  ],
+  "presets": [{ "name": "Featured Products" }]
+}
+{% endschema %}

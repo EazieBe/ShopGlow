@@ -1,0 +1,41 @@
+<div class="gic-trust">
+  {%- for block in section.blocks -%}
+    <div class="trust-item" {{ block.shopify_attributes }}>
+      <div class="trust-icon">{{ block.settings.icon }}</div>
+      <div>
+        <div class="trust-text-top">{{ block.settings.label }}</div>
+        <div class="trust-text-main">{{ block.settings.value }}</div>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Trust Item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "🚚" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Shipping" },
+        { "type": "text", "id": "value", "label": "Value", "default": "Free over $75" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "🚚", "label": "Free Shipping", "value": "Orders over $75" } },
+        { "type": "item", "settings": { "icon": "✅", "label": "Authenticated", "value": "Every vintage piece" } },
+        { "type": "item", "settings": { "icon": "↩️", "label": "Easy Returns", "value": "14-day policy" } },
+        { "type": "item", "settings": { "icon": "⭐", "label": "Posh Ambassador", "value": "16.5K+ followers" } },
+        { "type": "item", "settings": { "icon": "💛", "label": "Handpicked", "value": "Curated by Glo" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

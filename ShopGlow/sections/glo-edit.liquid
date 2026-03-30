@@ -1,0 +1,57 @@
+<section class="gic-glo-edit">
+  <div class="glo-inner">
+    <div class="glo-bg-sparkles"></div>
+    <div style="position:relative;z-index:2;">
+      <div class="glo-eyebrow">✦ {{ section.settings.eyebrow }}</div>
+      <h2 class="glo-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
+      <p class="glo-body">{{ section.settings.body }}</p>
+      <div class="glo-perks">
+        {%- for block in section.blocks -%}
+          <div class="glo-perk" {{ block.shopify_attributes }}>
+            <span class="glo-perk-dot"></span>
+            {{ block.settings.text }}
+          </div>
+        {%- endfor -%}
+      </div>
+      <a href="{{ section.settings.btn_url }}" class="btn-gold">{{ section.settings.btn_text }}</a>
+    </div>
+    <div class="glo-portrait-box" style="position:relative;z-index:2;">
+      {%- if section.settings.portrait != blank -%}
+        <img src="{{ section.settings.portrait | image_url: width: 800 }}" alt="The Glo Edit">
+      {%- else -%}
+        <span style="font-size:8rem;">✨</span>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Glo Edit",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Personally curated by Glo" },
+    { "type": "text", "id": "title", "label": "Title", "default": "The" },
+    { "type": "text", "id": "title_em", "label": "Title emphasis", "default": "Glo Edit — my favorites, right now." },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Every piece in this section is hand-picked by me. These are the bags, outfits, and accessories I'm personally obsessed with — the ones I'd carry, wear, and gift. Updated every single week." },
+    { "type": "text", "id": "btn_text", "label": "Button text", "default": "Shop The Glo Edit ✨" },
+    { "type": "url", "id": "btn_url", "label": "Button URL" },
+    { "type": "image_picker", "id": "portrait", "label": "Portrait image", "info": "Upload your portrait logo here" }
+  ],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Perk",
+      "settings": [{ "type": "text", "id": "text", "label": "Perk text", "default": "Hand-selected by Glo every week" }]
+    }
+  ],
+  "presets": [{
+    "name": "Glo Edit",
+    "blocks": [
+      { "type": "perk", "settings": { "text": "Hand-selected by Glo every week" } },
+      { "type": "perk", "settings": { "text": "All pieces Glo has personally loved" } },
+      { "type": "perk", "settings": { "text": "Mix of vintage finds & new boutique pieces" } },
+      { "type": "perk", "settings": { "text": "First access for newsletter subscribers" } }
+    ]
+  }]
+}
+{% endschema %}

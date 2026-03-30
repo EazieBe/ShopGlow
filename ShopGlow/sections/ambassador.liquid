@@ -1,0 +1,63 @@
+<section class="gic-ambassador">
+  <div class="amb-left">
+    {%- if section.settings.logo != blank -%}
+      <img src="{{ section.settings.logo | image_url: width: 200 }}" alt="{{ shop.name }}" class="amb-logo">
+    {%- endif -%}
+    <div class="amb-tag">✨ {{ section.settings.tag }}</div>
+    <h2 class="amb-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
+    <p class="amb-body">{{ section.settings.body }}</p>
+    <div class="amb-stats">
+      <div><div class="asn">{{ section.settings.stat1_num }}</div><div class="asl">{{ section.settings.stat1_label }}</div></div>
+      <div><div class="asn">{{ section.settings.stat2_num }}</div><div class="asl">{{ section.settings.stat2_label }}</div></div>
+      <div><div class="asn">{{ section.settings.stat3_num }}</div><div class="asl">{{ section.settings.stat3_label }}</div></div>
+    </div>
+  </div>
+  <div class="amb-right">
+    {%- for block in section.blocks -%}
+      <div class="rev-card" {{ block.shopify_attributes }}>
+        <div class="rev-stars">⭐⭐⭐⭐⭐</div>
+        <p class="rev-text">"{{ block.settings.review }}"</p>
+        <div class="rev-author">— {{ block.settings.author }}</div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ambassador Strip",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "tag", "label": "Tag Text", "default": "Official Posh Ambassador" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Shop with" },
+    { "type": "text", "id": "title_em", "label": "Title Emphasis", "default": "confidence — Glo's got you." },
+    { "type": "textarea", "id": "body", "label": "Body Text", "default": "I'm just a girl who loves to shop and is now working the Posh Streets. I have a weakness for Vintage Coach Bags! Do you?" },
+    { "type": "text", "id": "stat1_num", "label": "Stat 1 #", "default": "16.5K" },
+    { "type": "text", "id": "stat1_label", "label": "Stat 1 Label", "default": "Followers" },
+    { "type": "text", "id": "stat2_num", "label": "Stat 2 #", "default": "246+" },
+    { "type": "text", "id": "stat2_label", "label": "Stat 2 Label", "default": "Listings" },
+    { "type": "text", "id": "stat3_num", "label": "Stat 3 #", "default": "5★" },
+    { "type": "text", "id": "stat3_label", "label": "Stat 3 Label", "default": "Rated" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "review", "label": "Review Text" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Verified Buyer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ambassador Strip",
+      "blocks": [
+        { "type": "review", "settings": { "review": "Bag arrived exactly as described — absolutely beautiful. Glo packages everything so carefully!", "author": "Verified Buyer" } },
+        { "type": "review", "settings": { "review": "Fast shipping, gorgeous vintage Coach bag in perfect condition. Glo knows her stuff!", "author": "Verified Buyer" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

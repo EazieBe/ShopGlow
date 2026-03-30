@@ -1,0 +1,33 @@
+<section class="gic-email">
+  <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+  <h2 class="sec-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
+  <p class="email-sub">{{ section.settings.subtext }}</p>
+  <div class="email-perk">{{ section.settings.perk }}</div>
+
+  {% form 'customer', id: 'glow-list-form' %}
+    <div class="email-form">
+      <input class="email-inp" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder }}" required>
+      <input type="hidden" name="contact[tags]" value="glow-list">
+      <button type="submit" class="email-btn">{{ section.settings.btn_text }}</button>
+    </div>
+    {%- if form.posted_successfully? -%}
+      <p style="color:#E91E8C;font-weight:700;margin-top:16px;font-family:'Nunito',sans-serif;">✨ You're on the Glow List! Check your inbox.</p>
+    {%- endif -%}
+  {% endform %}
+</section>
+
+{% schema %}
+{
+  "name": "Email Signup",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join the Community" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Get on the" },
+    { "type": "text", "id": "title_em", "label": "Title Emphasis", "default": "Glow List" },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "New drops, exclusive deals & Coach finds delivered to your inbox before anyone else." },
+    { "type": "text", "id": "perk", "label": "Perk Text", "default": "🎉 15% off your first order when you join" },
+    { "type": "text", "id": "placeholder", "label": "Input Placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "Join the Glow List ✨" }
+  ],
+  "presets": [{ "name": "Email Signup" }]
+}
+{% endschema %}

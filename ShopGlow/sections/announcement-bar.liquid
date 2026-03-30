@@ -1,0 +1,18 @@
+<div class="announcement-bar" style="background: linear-gradient(90deg,#4A148C,#E91E8C,#7B1FA2,#E91E8C,#4A148C); background-size:300% 100%; animation: gradShift 6s ease infinite; color:white; text-align:center; padding:10px 20px; font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; font-family:'Nunito',sans-serif;">
+  {{ section.settings.text }}
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "✨ Posh Ambassador · Free Shipping $75+ · New Drops Weekly · Authenticated Vintage Coach ✨"
+    }
+  ],
+  "presets": [{ "name": "Announcement Bar" }]
+}
+{% endschema %}

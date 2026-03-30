@@ -1,0 +1,71 @@
+<footer class="gic-footer">
+  <div class="ft-grid">
+    <div class="ft-brand">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" class="ft-logo">
+      {%- else -%}
+        <div class="ft-logo-text">{{ shop.name }}</div>
+      {%- endif -%}
+      <p class="ft-desc">{{ section.settings.description }}</p>
+      <div class="socials">
+        {%- if section.settings.instagram != blank -%}
+          <a href="{{ section.settings.instagram }}" class="soc-btn" aria-label="Instagram" target="_blank">📸</a>
+        {%- endif -%}
+        {%- if section.settings.tiktok != blank -%}
+          <a href="{{ section.settings.tiktok }}" class="soc-btn" aria-label="TikTok" target="_blank">🎵</a>
+        {%- endif -%}
+        {%- if section.settings.poshmark != blank -%}
+          <a href="{{ section.settings.poshmark }}" class="soc-btn" aria-label="Poshmark" target="_blank">🛍</a>
+        {%- endif -%}
+        {%- if section.settings.pinterest != blank -%}
+          <a href="{{ section.settings.pinterest }}" class="soc-btn" aria-label="Pinterest" target="_blank">📌</a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- for block in section.blocks -%}
+      <div class="ft-col" {{ block.shopify_attributes }}>
+        <div class="ft-col-title">{{ block.settings.title }}</div>
+        <ul>
+          {%- for link in linklists[block.settings.menu].links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="ft-bottom">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</span>
+    <div style="display:flex;gap:24px;">
+      <a href="{{ pages['privacy-policy'].url }}">Privacy</a>
+      <a href="{{ pages['terms-of-service'].url }}">Terms</a>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Footer Logo" },
+    { "type": "textarea", "id": "description", "label": "Brand Description", "default": "Your destination for curated vintage Coach bags, designer handbags & fashion finds. Posh Ambassador · 16.5K+ happy shoppers." },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok", "label": "TikTok URL" },
+    { "type": "url", "id": "poshmark", "label": "Poshmark URL" },
+    { "type": "url", "id": "pinterest", "label": "Pinterest URL" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Footer Menu",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Column Title" },
+        { "type": "link_list", "id": "menu", "label": "Menu" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}
