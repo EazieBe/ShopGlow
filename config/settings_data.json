@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_primary": "#C9A84C",
@@ -7,6 +16,139 @@
     "color_text": "#2A1A0E",
     "heading_font": "'Cormorant Garamond', serif",
     "body_font": "'Nunito', sans-serif",
-    "poshmark_url": "https://poshmark.com/closet/glowingincoach"
+    "poshmark_url": "https://poshmark.com/closet/glowingincoach",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "text": "✨ Posh Ambassador · Free Shipping $75+ · New Drops Weekly · Authenticated Vintage Coach ✨"
+        }
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "badge_text": "Posh Ambassador · 16.5K Followers",
+          "heading_line1": "Vintage Coach &",
+          "heading_line2": "Fashion Finds",
+          "heading_line3": "that make you",
+          "heading_glow": "Glow.",
+          "subheading": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love.",
+          "primary_btn_text": "Shop Direct 🛍",
+          "primary_btn_url": "",
+          "secondary_btn_text": "Browse Poshmark",
+          "secondary_btn_url": "",
+          "hero_image": "shopify://shop_images/GlowingInCoach-logo-transparent.png",
+          "stat1_num": "246+",
+          "stat1_label": "Listings",
+          "stat2_num": "16.5K",
+          "stat2_label": "Followers",
+          "stat3_num": "17.8K",
+          "stat3_label": "Shares",
+          "stat4_num": "5★",
+          "stat4_label": "Rated"
+        }
+      },
+      "marquee": {
+        "type": "marquee",
+        "settings": {}
+      },
+      "trust-bar": {
+        "type": "trust-bar",
+        "settings": {}
+      },
+      "collection-grid": {
+        "type": "collection-grid",
+        "settings": {
+          "eyebrow": "Shop by Category",
+          "title_plain": "Find Your",
+          "title_glow": "Glow"
+        }
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "eyebrow": "Fresh Drops",
+          "title_plain": "Just",
+          "title_glow": "Arrived",
+          "collection": "",
+          "products_to_show": 6
+        }
+      },
+      "featured-banner": {
+        "type": "featured-banner",
+        "settings": {
+          "tag": "Posh Ambassador",
+          "title": "New arrivals",
+          "title_em": "every week.",
+          "subtitle": "Vintage Coach bags, designer finds & boutique pieces dropped fresh. Be the first to shop.",
+          "btn_text": "Shop New Arrivals ✨",
+          "btn_url": ""
+        }
+      },
+      "ambassador": {
+        "type": "ambassador",
+        "settings": {
+          "tag": "Official Posh Ambassador",
+          "title": "Shop with",
+          "title_em": "confidence — Glo's got you.",
+          "body": "I'm just a girl who loves to shop and is now working the Posh Streets. I have a weakness for Vintage Coach Bags! Do you?",
+          "stat1_num": "16.5K",
+          "stat1_label": "Followers",
+          "stat2_num": "246+",
+          "stat2_label": "Listings",
+          "stat3_num": "5★",
+          "stat3_label": "Rated"
+        }
+      },
+      "glo-edit": {
+        "type": "glo-edit",
+        "settings": {
+          "eyebrow": "✨ Personally curated by Glo",
+          "title": "The",
+          "title_em": "Glo Edit — my favorites, right now.",
+          "body": "Every piece in this section is hand-picked by me. These are the bags, outfits, and accessories I'm personally obsessed with — updated every week.",
+          "btn_text": "Shop The Glo Edit ✨",
+          "btn_url": ""
+        }
+      },
+      "instagram-feed": {
+        "type": "instagram-feed",
+        "settings": {
+          "title": "Follow the",
+          "title_em": "Glow",
+          "subtitle": "Shop our looks and get first access to new drops on Instagram",
+          "instagram_url": ""
+        }
+      },
+      "email-signup": {
+        "type": "email-signup",
+        "settings": {
+          "eyebrow": "Join the Community",
+          "title": "Get on the",
+          "title_em": "Glow List",
+          "subtext": "New drops, exclusive deals & Coach finds delivered to your inbox before anyone else.",
+          "perk": "🎉 15% off your first order when you join",
+          "placeholder": "your@email.com",
+          "btn_text": "Join the Glow List ✨"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "description": "Your destination for curated vintage Coach bags, designer handbags & fashion finds. Posh Ambassador · 16.5K+ happy shoppers.",
+          "instagram": "",
+          "tiktok": "",
+          "poshmark": "",
+          "pinterest": ""
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
