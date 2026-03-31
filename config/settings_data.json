@@ -47,6 +47,17 @@
       },
       "marquee": {
         "type": "marquee",
+        "blocks": {
+          "item_RzHPd4": {
+            "type": "item",
+            "settings": {
+              "text": "Vintage Coach Bags"
+            }
+          }
+        },
+        "block_order": [
+          "item_RzHPd4"
+        ],
         "settings": {}
       },
       "trust-bar": {
