@@ -428,109 +428,257 @@ ul{list-style:none;}
 }
 
 /* ================================================================
-   GLOWINGINCOACH — DEFINITIVE SHOPIFY OVERRIDES
-   These rules are scoped to kill every Shopify default injection
+   GLOWINGINCOACH LIVE FIXES v3
    ================================================================ */
 
-/* ── HIDE SHOPIFY'S DEFAULT INJECTED HEADER ─────────────────── */
-/* Shopify injects a header via content_for_header — hide it */
-body > header:not(.gic-nav),
-.shopify-section-group-header-group > *:not(.gic-nav):not(.gic-announcement):not(#gic-ann),
-[data-shopify-editor-section]:not([id*="header"]) > header { 
-  display: none !important; 
+/* ── AMBASSADOR — light background, fully readable ─────────── */
+.gic-ambassador {
+  background: linear-gradient(135deg, #2A1F14 0%, #3D2E1C 50%, #2A1F14 100%) !important;
+  padding: 80px 60px !important;
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 60px !important;
+  align-items: center !important;
+}
+.amb-left, .amb-right, .amb-col, .amb-side { position: relative; z-index: 2; }
+
+/* Tag */
+.amb-tag, .amb-badge, .amb-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(201,168,76,0.2) !important;
+  border: 1px solid rgba(201,168,76,0.4) !important;
+  color: #F0D080 !important;
+  -webkit-text-fill-color: #F0D080 !important;
+  padding: 7px 18px !important;
+  border-radius: 9999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 20px !important;
 }
 
-/* ── NAV: CREAM BACKGROUND, NEVER PURPLE ────────────────────── */
-.gic-nav,
-#gic-nav,
-nav#gic-nav {
-  background: rgba(255, 249, 245, 0.97) !important;
-  background-color: #FFF9F5 !important;
-  border-bottom: 1px solid rgba(201, 168, 76, 0.18) !important;
-  box-shadow: 0 2px 28px rgba(201, 168, 76, 0.1) !important;
+/* Title */
+.amb-title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 2.4rem !important;
+  font-weight: 600 !important;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  line-height: 1.15 !important;
+  margin-bottom: 18px !important;
 }
-.gic-nav.scrolled { box-shadow: 0 4px 40px rgba(201, 168, 76, 0.2) !important; }
+.amb-title em {
+  font-style: italic !important;
+  background: linear-gradient(135deg, #F0D080, #C9A84C, #FFE566) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
 
-/* ── ANNOUNCEMENT BAR: GOLD NOT PURPLE ──────────────────────── */
-.gic-announcement,
-#gic-ann,
-div.gic-announcement {
-  background: linear-gradient(90deg, #C9A84C 0%, #F0D080 33%, #FFE566 50%, #F0D080 67%, #C9A84C 100%) !important;
-  background-color: #C9A84C !important;
+/* Body / quote */
+.amb-body, .amb-quote {
+  font-size: 0.95rem !important;
+  color: rgba(255,249,245,0.75) !important;
+  -webkit-text-fill-color: rgba(255,249,245,0.75) !important;
+  line-height: 1.9 !important;
+  margin-bottom: 32px !important;
+  font-style: italic !important;
+  border-left: 3px solid rgba(201,168,76,0.4) !important;
+  padding-left: 18px !important;
+}
+
+/* Stats */
+.amb-stats, .amb-stats-row { display: flex !important; gap: 32px !important; }
+.asn, .amb-stat-num {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 2.1rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  margin-bottom: 4px !important;
+  background: linear-gradient(135deg, #F0D080, #C9A84C) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+.asl, .amb-stat-label {
+  font-size: 0.68rem !important;
+  color: rgba(255,249,245,0.45) !important;
+  -webkit-text-fill-color: rgba(255,249,245,0.45) !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+}
+
+/* Review cards */
+.rev-card {
+  background: rgba(255,249,245,0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+  border-radius: 18px !important;
+  padding: 22px 24px !important;
+  margin-bottom: 14px !important;
+  transition: transform 0.28s ease, border-color 0.28s !important;
+}
+.rev-card:hover { transform: translateX(6px) !important; border-color: rgba(201,168,76,0.5) !important; }
+.rev-stars { font-size: 0.9rem !important; margin-bottom: 10px !important; }
+.rev-text, .rev-txt {
+  font-size: 0.88rem !important;
+  color: rgba(255,249,245,0.85) !important;
+  -webkit-text-fill-color: rgba(255,249,245,0.85) !important;
+  line-height: 1.75 !important;
+  font-style: italic !important;
+  margin-bottom: 10px !important;
+}
+.rev-author, .rev-by {
+  font-size: 0.72rem !important;
+  color: rgba(255,249,245,0.45) !important;
+  -webkit-text-fill-color: rgba(255,249,245,0.45) !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+}
+
+/* ── FOOTER — white/cream background, dark text ─────────────── */
+.gic-footer, footer.gic-footer {
+  background: #FAF6F0 !important;
+  background-color: #FAF6F0 !important;
   color: #2A1A0E !important;
-  animation: goldShift 5s ease infinite !important;
-  background-size: 300% 100% !important;
+  padding: 64px 60px 32px !important;
+  border-top: 1px solid rgba(201,168,76,0.2) !important;
 }
-.gic-announcement *,
-#gic-ann * { color: #2A1A0E !important; }
-
-/* ── BODY / HTML ─────────────────────────────────────────────── */
-html, body {
-  background: #FFF9F5 !important;
-  background-color: #FFF9F5 !important;
+.ft-grid, .footer-grid {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr 1fr !important;
+  gap: 48px !important;
+  margin-bottom: 48px !important;
 }
-
-/* ── KILL SHOPIFY SECTION GAPS ───────────────────────────────── */
-.shopify-section,
-.shopify-section-group {
-  margin: 0 !important;
-  padding: 0 !important;
+.ft-logo, .footer-brand-logo {
+  width: 150px !important;
+  height: auto !important;
+  margin-bottom: 16px !important;
 }
-
-/* ── LOGO: FIXED SIZE, NO BLOWOUT ───────────────────────────── */
-.nav-logo {
+.ft-logo-text, .footer-brand-name {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: #2A1A0E !important;
+  -webkit-text-fill-color: #2A1A0E !important;
+  margin-bottom: 12px !important;
+}
+.ft-desc, .footer-brand-desc {
+  font-size: 0.85rem !important;
+  color: #6B4F3A !important;
+  -webkit-text-fill-color: #6B4F3A !important;
+  line-height: 1.9 !important;
+  margin-bottom: 24px !important;
+}
+.socials, .footer-socials { display: flex !important; gap: 10px !important; }
+.soc-btn, .footer-soc {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 10px !important;
+  background: rgba(201,168,76,0.12) !important;
+  border: 1px solid rgba(201,168,76,0.3) !important;
   display: flex !important;
   align-items: center !important;
-  flex-shrink: 0 !important;
-  height: 100% !important;
+  justify-content: center !important;
+  font-size: 1rem !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  text-decoration: none !important;
 }
-.nav-logo img {
-  height: 54px !important;
-  max-height: 54px !important;
-  width: auto !important;
-  max-width: 200px !important;
-  object-fit: contain !important;
-  display: block !important;
-  filter: drop-shadow(0 2px 10px rgba(201, 168, 76, 0.35)) !important;
+.soc-btn:hover, .footer-soc:hover {
+  background: rgba(201,168,76,0.25) !important;
+  transform: translateY(-3px) !important;
+}
+.ft-col-title, .footer-col-title {
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 18px !important;
+  color: #C9A84C !important;
+  -webkit-text-fill-color: #C9A84C !important;
+}
+.ft-col ul, .footer-col ul { display: flex !important; flex-direction: column !important; gap: 11px !important; }
+.ft-col ul li a, .footer-col ul li a {
+  font-size: 0.85rem !important;
+  color: #6B4F3A !important;
+  -webkit-text-fill-color: #6B4F3A !important;
+  transition: color 0.2s !important;
+  text-decoration: none !important;
+}
+.ft-col ul li a:hover, .footer-col ul li a:hover {
+  color: #2A1A0E !important;
+  -webkit-text-fill-color: #2A1A0E !important;
+}
+.ft-bottom, .footer-bottom {
+  border-top: 1px solid rgba(201,168,76,0.15) !important;
+  padding-top: 24px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 0.76rem !important;
+  color: #B8A090 !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+}
+.ft-bottom a, .footer-bottom a, .ft-bottom span, .footer-bottom span {
+  color: #B8A090 !important;
+  -webkit-text-fill-color: #B8A090 !important;
+  text-decoration: none !important;
+}
+.ft-bottom a:hover, .footer-bottom a:hover {
+  color: #2A1A0E !important;
+  -webkit-text-fill-color: #2A1A0E !important;
 }
 
-/* ── NAV LINKS ───────────────────────────────────────────────── */
-.nav-link { color: #6B4F3A !important; }
-.nav-link:hover, .nav-link.active { 
-  color: #2A1A0E !important; 
-  background: rgba(201, 168, 76, 0.1) !important; 
+/* ── HERO GLOW — holographic shimmer ──────────────────────── */
+.hero-title-glow {
+  display: block !important;
+  font-style: italic !important;
+  background: linear-gradient(135deg, #E8A0C8, #D4A040, #90D8C0, #90C8E8, #C0A0E8, #E8A0C8) !important;
+  background-size: 300% 100% !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  animation: shimmer 5s ease infinite !important;
 }
-.nav-link.sale { color: #8B6914 !important; }
-.nav-shop-btn {
-  background: linear-gradient(135deg, #C9A84C, #F0D080) !important;
+.sec-title em, .sec-tit em, .glo-title em, .banner-title em,
+.amb-title em, .edit-h2 em, .cart-empty-title em {
+  font-style: italic !important;
+  background: linear-gradient(135deg, #E8A0C8, #C8A060, #90D8C0, #90C8E8, #C0A0E8) !important;
+  background-size: 300% 100% !important;
+  animation: shimmer 5s ease infinite !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* ── GENERAL — cream bg, no dark brown anywhere ────────────── */
+html, body { background: #FFF9F5 !important; }
+.shopify-section { margin: 0 !important; padding: 0 !important; }
+.gic-nav, #gic-nav { background: rgba(255,249,245,0.97) !important; }
+.gic-announcement, #gic-ann, .announcement-bar {
+  background: linear-gradient(90deg,#C9A84C,#F0D080,#FFE566,#F0D080,#C9A84C) !important;
+  background-size: 300% 100% !important;
+  animation: goldShift 5s ease infinite !important;
   color: #2A1A0E !important;
 }
+.gic-announcement *, #gic-ann *, .announcement-bar * {
+  color: #2A1A0E !important;
+  -webkit-text-fill-color: #2A1A0E !important;
+}
+.nav-link { color: #6B4F3A !important; }
+.nav-link:hover, .nav-link.active { color: #2A1A0E !important; background: rgba(201,168,76,0.1) !important; }
+.nav-shop-btn { background: linear-gradient(135deg,#C9A84C,#F0D080) !important; color: #2A1A0E !important; }
+.nav-logo img { height: 54px !important; max-width: 200px !important; width: auto !important; }
 
-/* ── SHOPIFY VARIABLE OVERRIDES ──────────────────────────────── */
-:root {
-  --color-base-background-1: 255, 249, 245 !important;
-  --color-base-background-2: 255, 240, 230 !important;
-  --color-base-text: 42, 26, 14 !important;
-  --color-base-accent-1: 201, 168, 76 !important;
-  --color-base-accent-2: 240, 208, 128 !important;
-  --color-button: 201, 168, 76 !important;
-  --color-button-text: 42, 26, 14 !important;
+/* ── FEATURED BANNER — keep dark but readable ──────────────── */
+.gic-featured-banner {
+  background: linear-gradient(135deg, #1C100A, #2A1A0E, #1C100A) !important;
 }
-
-/* ── FOOTER LOGO ─────────────────────────────────────────────── */
-.footer-brand-logo { width: 150px !important; max-width: 150px !important; height: auto !important; }
-
-/* ── HERO LAYOUT FIX ─────────────────────────────────────────── */
-/* Ensure hero text left, image right */
-.gic-hero {
-  grid-template-columns: 1.15fr 0.85fr !important;
-}
-.hero-left { 
-  grid-column: 1 !important; 
-  order: 1 !important;
-}
-.hero-right { 
-  grid-column: 2 !important; 
-  order: 2 !important;
-}
-.hero-title-glow { background: linear-gradient(135deg, #E8A0C8, #D4A040, #90D8C0, #90C8E8, #C0A0E8, #E8A0C8) !important; background-size: 300% 100% !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; animation: shimmer 5s ease infinite !important; }
+.banner-title { color: white !important; -webkit-text-fill-color: white !important; }
+.banner-sub, .banner-p { color: rgba(255,249,245,0.7) !important; -webkit-text-fill-color: rgba(255,249,245,0.7) !important; }
