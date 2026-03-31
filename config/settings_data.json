@@ -120,7 +120,8 @@
           "title_em": "Glo Edit — my favorites, right now.",
           "body": "Every piece in this section is hand-picked by me. These are the bags, outfits, and accessories I'm personally obsessed with — the ones I'd carry, wear, and gift. Updated every single week.",
           "btn_text": "Shop The Glo Edit ✨",
-          "btn_url": ""
+          "btn_url": "shopify://blogs/news",
+          "portrait": "shopify://shop_images/Grok_Image_2026-03-20_at_8.22.53_PM.png"
         }
       },
       "instagram-feed": {
