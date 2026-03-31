@@ -36,10 +36,10 @@
           "heading_line1": "Vintage Coach &",
           "heading_line2": "Fashion Finds",
           "heading_line3": "that make you",
-          "heading_glow": "Glow.",
+          "heading_glow": "Glow",
           "subtext": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love by Glo. Authenticated. Affordable. Iconic.",
           "btn1_text": "Shop Direct 🛍",
-          "btn1_url": "",
+          "btn1_url": "shopify://collections",
           "btn2_text": "Browse Poshmark",
           "btn2_url": "https://poshmark.com/closet/glowingincoach",
           "portrait_image": "shopify://shop_images/GlowingInCoach-logo-transparent.png"
@@ -55,6 +55,21 @@
       },
       "collection-grid": {
         "type": "collection-grid",
+        "blocks": {
+          "collection_nUY9ma": {
+            "type": "collection",
+            "settings": {
+              "collection": "vintage-coach",
+              "label": "",
+              "sublabel": "Shop Now",
+              "emoji": "👜",
+              "bg_gradient": "linear-gradient(135deg,#FCE4EC,#F8BBD9)"
+            }
+          }
+        },
+        "block_order": [
+          "collection_nUY9ma"
+        ],
         "settings": {
           "eyebrow": "Shop by Category",
           "title_plain": "Find Your",
@@ -67,7 +82,7 @@
           "eyebrow": "Fresh Drops",
           "title_plain": "Just",
           "title_glow": "Arrived",
-          "collection": "",
+          "collection": "featured-products",
           "products_to_show": 6
         }
       },
@@ -79,7 +94,7 @@
           "title_em": "every week.",
           "subtitle": "Vintage Coach bags, designer finds & boutique pieces dropped fresh. Be the first to shop.",
           "btn_text": "Shop New Arrivals ✨",
-          "btn_url": ""
+          "btn_url": "shopify://collections/vintage-coach"
         }
       },
       "ambassador": {
