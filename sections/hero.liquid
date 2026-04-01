@@ -1,67 +1,74 @@
 <section class="gic-hero" id="gic-hero">
-  <div class="hero-ambient"></div>
 
-  <div class="hero-left">
+  <!-- Animated background orbs -->
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+
+  <!-- Floating sparkles -->
+  <span class="hero-sp" style="top:8%;left:6%;--sz:1.6rem;--dur:2.8s;--del:0s;">✦</span>
+  <span class="hero-sp" style="top:14%;right:9%;--sz:1rem;--dur:2.2s;--del:.7s;">✨</span>
+  <span class="hero-sp" style="top:72%;left:4%;--sz:1.2rem;--dur:3s;--del:1.4s;">⭐</span>
+  <span class="hero-sp" style="bottom:18%;right:6%;--sz:1.4rem;--dur:2.5s;--del:1s;">💫</span>
+  <span class="hero-sp" style="top:40%;right:3%;--sz:.9rem;--dur:2.8s;--del:2s;">✦</span>
+  <span class="hero-sp" style="bottom:30%;left:8%;--sz:.8rem;--dur:2.2s;--del:.4s;">✨</span>
+
+  <div class="hero-content">
+
+    <!-- Logo centered big -->
+    <div class="hero-logo-wrap">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: width: 600 }}"
+             alt="{{ shop.name }}"
+             class="hero-main-logo"
+             loading="eager">
+      {%- else -%}
+        <div class="hero-logo-fallback">{{ shop.name }}</div>
+      {%- endif -%}
+    </div>
+
+    <!-- Eyebrow badge -->
     <div class="hero-eyebrow">
       <span class="hero-eyebrow-dot"></span>
       {{ section.settings.badge_text }}
     </div>
 
-    <h1 class="hero-title">
-      {{ section.settings.heading_line1 }}<br>
-      {{ section.settings.heading_line2 }}<br>
-      {{ section.settings.heading_line3 }}<br>
-      <span class="hero-title-glow">{{ section.settings.heading_glow }}</span>
+    <!-- Headline -->
+    <h1 class="hero-h1">
+      {{ section.settings.heading_line1 }}
+      <span class="hero-h1-glow">{{ section.settings.heading_glow }}</span>
+      {{ section.settings.heading_line2 }}
     </h1>
 
+    <!-- Subtext -->
     <p class="hero-sub">{{ section.settings.subtext }}</p>
 
+    <!-- CTA Buttons -->
     <div class="hero-ctas">
-      <a href="{{ section.settings.btn1_url | default: routes.collections_url }}" class="btn-gold">
+      <a href="{{ section.settings.btn1_url | default: routes.collections_url }}" class="btn-gold hero-btn-main">
         {{ section.settings.btn1_text }}
       </a>
-      <a href="{{ section.settings.btn2_url | default: 'https://poshmark.com/closet/glowingincoach' }}" class="btn-ghost" target="_blank" rel="noopener">
+      <a href="{{ section.settings.btn2_url | default: 'https://poshmark.com/closet/glowingincoach' }}"
+         class="btn-ghost hero-btn-ghost" target="_blank" rel="noopener">
         {{ section.settings.btn2_text }}
       </a>
     </div>
 
-    <div class="hero-proof">
+    <!-- Trust stats row -->
+    <div class="hero-trust-strip">
       {%- for block in section.blocks -%}
         {%- if block.type == 'stat' -%}
-          <div class="proof-stat" {{ block.shopify_attributes }}>
-            <div class="proof-num">{{ block.settings.number }}</div>
-            <div class="proof-label">{{ block.settings.label }}</div>
+          <div class="hero-trust-item" {{ block.shopify_attributes }}>
+            <span class="hero-trust-num">{{ block.settings.number }}</span>
+            <span class="hero-trust-label">{{ block.settings.label }}</span>
           </div>
+          {%- unless forloop.last -%}
+            <div class="hero-trust-divider"></div>
+          {%- endunless -%}
         {%- endif -%}
       {%- endfor -%}
     </div>
-  </div>
 
-  <div class="hero-right">
-    <div class="portrait-wrap">
-      <div class="portrait-halo"></div>
-      {%- if section.settings.portrait_image != blank -%}
-        <img
-          src="{{ section.settings.portrait_image | image_url: width: 900 }}"
-          alt="{{ shop.name }}"
-          class="portrait-img"
-          loading="eager">
-      {%- else -%}
-        <div style="width:420px;height:420px;display:flex;align-items:center;justify-content:center;font-size:10rem;">👜</div>
-      {%- endif -%}
-      <div class="proof-chip c1">
-        <div class="chip-ico">✅</div>
-        <div><div class="chip-label">Authenticated</div><div class="chip-val">Vintage Coach</div></div>
-      </div>
-      <div class="proof-chip c2">
-        <div class="chip-ico">🚚</div>
-        <div><div class="chip-label">Free Shipping</div><div class="chip-val">Orders $75+</div></div>
-      </div>
-      <div class="proof-chip c3">
-        <div class="chip-ico">⭐</div>
-        <div><div class="chip-label">Posh Ambassador</div><div class="chip-val">Top Seller</div></div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -69,22 +76,26 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "✨ Posh Ambassador · 16.5K Followers" },
-    { "type": "text", "id": "heading_line1", "label": "Heading line 1", "default": "Vintage Coach &" },
-    { "type": "text", "id": "heading_line2", "label": "Heading line 2", "default": "Fashion Finds" },
-    { "type": "text", "id": "heading_line3", "label": "Heading line 3", "default": "that make you" },
-    { "type": "text", "id": "heading_glow", "label": "Glowing word", "default": "Glow." },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love by Glo. Authenticated. Affordable. Iconic." },
-    { "type": "text", "id": "btn1_text", "label": "Button 1 text", "default": "Shop Direct 🛍" },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Hero Logo",
+      "info": "Your GlowingInCoach logo — displays large and centered in the hero"
+    },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "✨ Posh Ambassador · 16.5K Followers · 5★ Rated" },
+    { "type": "text", "id": "heading_line1", "label": "Heading — before glow word", "default": "Vintage Coach Bags &" },
+    { "type": "text", "id": "heading_glow", "label": "Heading — glowing word", "default": "Designer Finds" },
+    { "type": "text", "id": "heading_line2", "label": "Heading — after glow word", "default": "that make you Glow." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Authenticated vintage Coach bags, designer handbags & boutique fashion — handpicked with love by Glo." },
+    { "type": "text", "id": "btn1_text", "label": "Button 1 text", "default": "Shop Now 🛍" },
     { "type": "url", "id": "btn1_url", "label": "Button 1 URL" },
-    { "type": "text", "id": "btn2_text", "label": "Button 2 text", "default": "Browse Poshmark" },
-    { "type": "url", "id": "btn2_url", "label": "Button 2 URL" },
-    { "type": "image_picker", "id": "portrait_image", "label": "Hero portrait image", "info": "Your portrait logo — shows on the right side of the hero" }
+    { "type": "text", "id": "btn2_text", "label": "Button 2 text", "default": "Shop on Poshmark ↗" },
+    { "type": "url", "id": "btn2_url", "label": "Button 2 URL" }
   ],
   "blocks": [
     {
       "type": "stat",
-      "name": "Stat",
+      "name": "Trust Stat",
       "settings": [
         { "type": "text", "id": "number", "label": "Number", "default": "246+" },
         { "type": "text", "id": "label", "label": "Label", "default": "Listings" }
@@ -96,8 +107,8 @@
     "blocks": [
       { "type": "stat", "settings": { "number": "246+", "label": "Listings" } },
       { "type": "stat", "settings": { "number": "16.5K", "label": "Followers" } },
-      { "type": "stat", "settings": { "number": "17.8K", "label": "Shares" } },
-      { "type": "stat", "settings": { "number": "5★", "label": "Rated" } }
+      { "type": "stat", "settings": { "number": "5★", "label": "Rated" } },
+      { "type": "stat", "settings": { "number": "Free", "label": "Ship $75+" } }
     ]
   }]
 }
