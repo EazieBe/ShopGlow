@@ -33,9 +33,8 @@
         "settings": {
           "badge_text": "✨ Posh Ambassador · 16.5K Followers",
           "heading_line1": "Vintage Coach &",
-          "heading_line2": "Fashion Finds",
-          "heading_line3": "that make you",
           "heading_glow": "Glow.",
+          "heading_line2": "Fashion Finds",
           "subtext": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love by Glo. Authenticated. Affordable. Iconic.",
           "btn1_text": "Shop Direct 🛍",
           "btn1_url": "",
@@ -109,23 +108,21 @@
       "instagram-feed": {
         "type": "instagram-feed",
         "settings": {
+          "eyebrow": "Shop My Closet",
           "title": "Follow the",
           "title_em": "Glow",
-          "subtitle": "Shop our looks and get first access to new drops on Instagram",
-          "instagram_url": ""
+          "subtext": "Browse authenticated vintage Coach bags, designer handbags & fashion finds. New listings added every week.",
+          "poshmark_username": "glowingincoach",
+          "poshmark_url": "https://poshmark.com/closet/glowingincoach",
+          "listing_count": "246+",
+          "btn_text": "Visit My Poshmark Closet ↗",
+          "btn2_url": "",
+          "btn2_text": "Shop Here Instead"
         }
       },
       "email-signup": {
         "type": "email-signup",
-        "settings": {
-          "eyebrow": "Join the Community",
-          "title": "Get on the",
-          "title_em": "Glow List",
-          "subtext": "New drops, exclusive deals & Coach finds delivered to your inbox before anyone else.",
-          "perk": "🎉 15% off your first order when you join",
-          "placeholder": "your@email.com",
-          "btn_text": "Join the Glow List ✨"
-        }
+        "settings": {}
       },
       "footer": {
         "type": "footer",
