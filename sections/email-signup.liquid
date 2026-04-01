@@ -1,33 +1,72 @@
-<section class="gic-email">
-  <div class="eyebrow">{{ section.settings.eyebrow }}</div>
-  <h2 class="sec-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
-  <p class="email-sub">{{ section.settings.subtext }}</p>
-  <div class="email-perk">{{ section.settings.perk }}</div>
+<section class="gic-why-glo">
+  <div class="why-inner">
 
-  {% form 'customer', id: 'glow-list-form' %}
-    <div class="email-form">
-      <input class="email-inp" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder }}" required>
-      <input type="hidden" name="contact[tags]" value="glow-list">
-      <button type="submit" class="email-btn">{{ section.settings.btn_text }}</button>
+    <div class="why-left">
+      <div class="sec-eyebrow">Why Shop With Glo</div>
+      <h2 class="sec-title">Trusted by <em>thousands</em> of happy shoppers.</h2>
+      <p class="why-sub">Every bag is personally authenticated, carefully described, and shipped with love. No surprises — just beautiful finds.</p>
+
+      <div class="why-grid">
+        {%- for block in section.blocks -%}
+          <div class="why-card" {{ block.shopify_attributes }}>
+            <div class="why-icon">{{ block.settings.icon }}</div>
+            <div class="why-title">{{ block.settings.title }}</div>
+            <div class="why-text">{{ block.settings.text }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
     </div>
-    {%- if form.posted_successfully? -%}
-      <p style="color:#E91E8C;font-weight:700;margin-top:16px;font-family:'Nunito',sans-serif;">✨ You're on the Glow List! Check your inbox.</p>
-    {%- endif -%}
-  {% endform %}
+
+    <div class="why-right">
+      <div class="why-review-stack">
+        <div class="why-big-stat">
+          <span class="why-big-num">5.0</span>
+          <div class="why-stars">⭐⭐⭐⭐⭐</div>
+          <div class="why-stat-label">Average seller rating</div>
+        </div>
+        <div class="why-review">
+          <div class="why-rev-stars">⭐⭐⭐⭐⭐</div>
+          <p class="why-rev-text">"Bag arrived exactly as described — absolutely beautiful. Glo packages everything so carefully. Will definitely buy again!"</p>
+          <div class="why-rev-by">— Verified Poshmark Buyer</div>
+        </div>
+        <div class="why-review">
+          <div class="why-rev-stars">⭐⭐⭐⭐⭐</div>
+          <p class="why-rev-text">"Fast shipping, gorgeous vintage Coach bag in perfect condition. Glo knows her stuff — completely trustworthy seller."</p>
+          <div class="why-rev-by">— Verified Poshmark Buyer</div>
+        </div>
+        <div class="why-review">
+          <div class="why-rev-stars">⭐⭐⭐⭐⭐</div>
+          <p class="why-rev-text">"Third purchase and every single one has exceeded expectations. My go-to for designer bags. Love love love!"</p>
+          <div class="why-rev-by">— Verified Poshmark Buyer</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 {% schema %}
 {
-  "name": "Email Signup",
-  "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join the Community" },
-    { "type": "text", "id": "title", "label": "Title", "default": "Get on the" },
-    { "type": "text", "id": "title_em", "label": "Title Emphasis", "default": "Glow List" },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "New drops, exclusive deals & Coach finds delivered to your inbox before anyone else." },
-    { "type": "text", "id": "perk", "label": "Perk Text", "default": "🎉 15% off your first order when you join" },
-    { "type": "text", "id": "placeholder", "label": "Input Placeholder", "default": "your@email.com" },
-    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "Join the Glow List ✨" }
+  "name": "Why Shop With Glo",
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Reason",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "✅" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Authenticated" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Every vintage piece is personally verified before listing." }
+      ]
+    }
   ],
-  "presets": [{ "name": "Email Signup" }]
+  "presets": [{
+    "name": "Why Shop With Glo",
+    "blocks": [
+      { "type": "reason", "settings": { "icon": "✅", "title": "100% Authenticated", "text": "Every vintage Coach bag personally verified before listing." } },
+      { "type": "reason", "settings": { "icon": "🚚", "title": "Fast Shipping", "text": "Ships within 1-2 days, beautifully packaged every time." } },
+      { "type": "reason", "settings": { "icon": "💛", "title": "Handpicked by Glo", "text": "Only pieces I personally love make it into the closet." } },
+      { "type": "reason", "settings": { "icon": "↩️", "title": "Easy Returns", "text": "14-day return policy, no questions asked." } }
+    ]
+  }]
 }
 {% endschema %}
