@@ -17,8 +17,8 @@
 
     <!-- Logo centered big -->
     <div class="hero-logo-wrap">
-      {%- if section.settings.logo != blank -%}
-        <img src="{{ section.settings.logo | image_url: width: 600 }}"
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: 600 }}"
              alt="{{ shop.name }}"
              class="hero-main-logo"
              loading="eager">
