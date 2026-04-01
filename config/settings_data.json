@@ -31,14 +31,14 @@
       "hero": {
         "type": "hero",
         "settings": {
-          "badge_text": "✨ Posh Ambassador · 16.5K Followers",
-          "heading_line1": "Vintage Coach &",
-          "heading_glow": "Glow.",
-          "heading_line2": "Fashion Finds",
-          "subtext": "Curated vintage Coach bags, designer handbags & fashion finds — handpicked with love by Glo. Authenticated. Affordable. Iconic.",
-          "btn1_text": "Shop Direct 🛍",
+          "badge_text": "✨ Posh Ambassador · 16.5K Followers · 5★ Rated",
+          "heading_line1": "Vintage Coach Bags &",
+          "heading_glow": "Designer Finds",
+          "heading_line2": "that make you Glow.",
+          "subtext": "Authenticated vintage Coach bags, designer handbags & boutique fashion — handpicked with love by Glo.",
+          "btn1_text": "Shop Now 🛍",
           "btn1_url": "",
-          "btn2_text": "Browse Poshmark",
+          "btn2_text": "Shop on Poshmark ↗",
           "btn2_url": ""
         }
       },
@@ -68,17 +68,6 @@
           "products_to_show": 6
         }
       },
-      "featured-banner": {
-        "type": "featured-banner",
-        "settings": {
-          "tag": "Posh Ambassador",
-          "title": "New arrivals",
-          "title_em": "every week.",
-          "subtitle": "Vintage Coach bags, designer finds & boutique pieces dropped fresh. Be the first to shop.",
-          "btn_text": "Shop New Arrivals ✨",
-          "btn_url": ""
-        }
-      },
       "ambassador": {
         "type": "ambassador",
         "settings": {
@@ -94,6 +83,15 @@
           "stat3_label": "Rated"
         }
       },
+      "instagram-feed": {
+        "type": "instagram-feed",
+        "settings": {
+          "title": "Follow the",
+          "title_em": "Glow",
+          "subtitle": "Shop our looks and get first access to new drops on Instagram",
+          "instagram_url": ""
+        }
+      },
       "glo-edit": {
         "type": "glo-edit",
         "settings": {
@@ -103,21 +101,6 @@
           "body": "Every piece in this section is hand-picked by me. These are the bags, outfits, and accessories I'm personally obsessed with — the ones I'd carry, wear, and gift. Updated every single week.",
           "btn_text": "Shop The Glo Edit ✨",
           "btn_url": ""
-        }
-      },
-      "instagram-feed": {
-        "type": "instagram-feed",
-        "settings": {
-          "eyebrow": "Shop My Closet",
-          "title": "Follow the",
-          "title_em": "Glow",
-          "subtext": "Browse authenticated vintage Coach bags, designer handbags & fashion finds. New listings added every week.",
-          "poshmark_username": "glowingincoach",
-          "poshmark_url": "https://poshmark.com/closet/glowingincoach",
-          "listing_count": "246+",
-          "btn_text": "Visit My Poshmark Closet ↗",
-          "btn2_url": "",
-          "btn2_text": "Shop Here Instead"
         }
       },
       "email-signup": {

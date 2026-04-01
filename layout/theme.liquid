@@ -8,7 +8,7 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   {%- if settings.favicon != blank -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -27,103 +27,36 @@
   <meta property="og:site_name" content="{{ shop.name }}">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:title" content="{{ page_title }}">
+  {%- if page_image -%}
+    <meta property="og:image" content="{{ page_image | image_url: width: 1200 }}">
+  {%- endif -%}
 
   {{ content_for_header }}
 
   {{ 'glowingincoach.css' | asset_url | stylesheet_tag }}
 
   <style>
-    /* CRITICAL — loader must be centered, cannot be overridden */
-    #gic-loader {
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      bottom: 0 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      background: #1C100A !important;
-      z-index: 99999 !important;
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    #gic-loader > div {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
-      justify-content: center !important;
-      text-align: center !important;
-      width: 100% !important;
-    }
-    #gic-loader img {
-      display: block !important;
-      margin: 0 auto !important;
-      width: 180px !important;
-      max-width: 50vw !important;
-      height: auto !important;
-    }
-    #gic-loader.out {
-      opacity: 0 !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
+    /* CRITICAL OVERRIDES — must be inline to beat content_for_header injections */
+    *:where(header:not(.gic-nav)):not(.gic-nav *) { display: none !important; }
+    .gic-loader, .gic-nav, .gic-announcement, #MainContent, .gic-footer,
+    .gic-hero, .gic-marquee, .gic-trust, .gic-collections, .gic-products,
+    .gic-featured-banner, .gic-ambassador, .gic-glo-edit, .gic-instagram,
+    .gic-email, footer.gic-footer, #gic-loader { display: revert !important; }
+    body { background: #FFF9F5 !important; opacity: 1 !important; }
   </style>
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
 
-  <!-- LOADER -->
-  <div id="gic-loader" style="position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:#1C100A;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease;">
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
-      {%- if settings.logo != blank -%}
-        <img src="{{ settings.logo | image_url: width: 320 }}" alt="{{ shop.name }}" style="width:180px;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 0 28px rgba(201,168,76,0.55));">
-      {%- else -%}
-        <div style="font-size:5rem;text-align:center;">👜</div>
-      {%- endif -%}
-      <div style="font-family:'Cormorant Garamond',serif;font-size:0.88rem;letter-spacing:0.38em;text-transform:uppercase;margin-top:22px;text-align:center;background:linear-gradient(135deg,#C9A84C,#F0D080);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">{{ shop.name }}</div>
-      <div style="width:150px;height:2px;background:rgba(201,168,76,0.15);border-radius:2px;margin-top:18px;overflow:hidden;">
-        <div id="loader-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#C9A84C,#F0D080);border-radius:2px;transition:width 1.8s ease;"></div>
-      </div>
-    </div>
+  <div class="gic-loader" id="gic-loader">
+    {%- if settings.logo != blank -%}
+      <img src="{{ settings.logo | image_url: width: 240 }}" alt="{{ shop.name }}" class="loader-logo">
+    {%- else -%}
+      <div style="font-size:3rem; animation: float 2s ease-in-out infinite;">👜</div>
+    {%- endif -%}
+    <div class="loader-text">{{ shop.name }}</div>
+    <div class="loader-bar"><div class="loader-fill"></div></div>
   </div>
-
-  <!-- DISMISS LOADER — inline script, runs immediately -->
-  <script>
-    // Start progress bar
-    setTimeout(function() {
-      var bar = document.getElementById('loader-bar');
-      if (bar) bar.style.width = '100%';
-    }, 50);
-
-    // Hide loader after animation completes
-    function hideLoader() {
-      var loader = document.getElementById('gic-loader');
-      if (!loader) return;
-      loader.style.opacity = '0';
-      loader.style.visibility = 'hidden';
-      loader.style.pointerEvents = 'none';
-      setTimeout(function() { loader.style.display = 'none'; }, 650);
-    }
-
-    // Hide after 2 seconds no matter what
-    setTimeout(hideLoader, 2000);
-
-    // Also hide as soon as page is interactive
-    if (document.readyState === 'complete') {
-      setTimeout(hideLoader, 1800);
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(hideLoader, 300);
-      });
-      document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(hideLoader, 1800);
-      });
-    }
-  </script>
 
   {% section 'header' %}
 
@@ -134,6 +67,5 @@
   {% section 'footer' %}
 
   {{ 'glowingincoach.js' | asset_url | script_tag }}
-
 </body>
 </html>
