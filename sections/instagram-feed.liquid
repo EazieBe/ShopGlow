@@ -1,52 +1,147 @@
-<section class="gic-instagram">
-  <div class="sec-hdr">
-    <div class="sec-eyebrow">Follow Along</div>
-    <h2 class="sec-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
-    <p class="sec-sub">{{ section.settings.subtitle }}</p>
-  </div>
+<section class="gic-poshmark-cta">
+  <div class="posh-cta-bg"></div>
 
-  <div class="insta-grid">
-    {%- for block in section.blocks -%}
-      <a href="{{ block.settings.link | default: section.settings.instagram_url }}" class="insta-tile" target="_blank" {{ block.shopify_attributes }}>
-        {%- if block.settings.image != blank -%}
-          <img src="{{ block.settings.image | image_url: width: 400 }}" alt="Instagram post" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-        {%- endif -%}
-        <div class="insta-tile-overlay">
-          <div class="insta-overlay-icon">📸</div>
-        </div>
+  <div class="posh-cta-inner">
+
+    <!-- LEFT: copy + stats + buttons -->
+    <div class="posh-cta-content">
+      <div class="posh-eyebrow">✦ {{ section.settings.eyebrow }}</div>
+      <h2 class="posh-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
+      <p class="posh-sub">{{ section.settings.subtext }}</p>
+
+      <div class="posh-stats">
+        <div class="posh-stat"><span class="posh-stat-n">246+</span><span class="posh-stat-l">Listings</span></div>
+        <div class="posh-stat-div"></div>
+        <div class="posh-stat"><span class="posh-stat-n">16.5K</span><span class="posh-stat-l">Followers</span></div>
+        <div class="posh-stat-div"></div>
+        <div class="posh-stat"><span class="posh-stat-n">5★</span><span class="posh-stat-l">Rating</span></div>
+        <div class="posh-stat-div"></div>
+        <div class="posh-stat"><span class="posh-stat-n">17.8K</span><span class="posh-stat-l">Shares</span></div>
+      </div>
+
+      <div class="posh-cta-btns">
+        <a href="{{ section.settings.poshmark_url | default: 'https://poshmark.com/closet/glowingincoach' }}"
+           class="btn-gold posh-btn" target="_blank" rel="noopener">
+          {{ section.settings.btn_text }}
+        </a>
+        <a href="{{ section.settings.btn2_url | default: routes.collections_url }}"
+           class="posh-btn-ghost">
+          {{ section.settings.btn2_text }}
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT: Live Poshmark listings fetched via JS -->
+    <div class="posh-live-feed">
+      <div class="posh-feed-header">
+        <span class="posh-feed-label">✦ Live from my closet</span>
+        <span class="posh-feed-dot"></span>
+        <span class="posh-feed-live">Updated daily</span>
+      </div>
+      <div class="posh-feed-grid" id="posh-feed-grid">
+        <!-- Skeleton loaders shown while fetching -->
+        <div class="posh-skeleton"></div>
+        <div class="posh-skeleton"></div>
+        <div class="posh-skeleton"></div>
+        <div class="posh-skeleton"></div>
+        <div class="posh-skeleton"></div>
+        <div class="posh-skeleton"></div>
+      </div>
+      <a href="{{ section.settings.poshmark_url | default: 'https://poshmark.com/closet/glowingincoach' }}"
+         class="posh-see-all" target="_blank" rel="noopener">
+        See all {{ section.settings.listing_count | default: '246+' }} listings →
       </a>
-    {%- else -%}
-      {%- for i in (1..6) -%}
-        <div class="insta-tile"></div>
-      {%- endfor -%}
-    {%- endfor -%}
-  </div>
+    </div>
 
-  <a href="{{ section.settings.instagram_url }}" target="_blank" class="insta-follow-btn">
-    📸 &nbsp; Follow @glowingincoach
-  </a>
+  </div>
 </section>
+
+<script>
+(function() {
+  var POSH_USER = {{ section.settings.poshmark_username | default: 'glowingincoach' | json }};
+  var POSH_URL  = {{ section.settings.poshmark_url | default: 'https://poshmark.com/closet/glowingincoach' | json }};
+  var grid      = document.getElementById('posh-feed-grid');
+  if (!grid) return;
+
+  // Poshmark doesn't have a public API but their listings are accessible
+  // via an RSS-compatible endpoint — we proxy through allorigins to bypass CORS
+  var feedUrl = 'https://api.allorigins.win/get?url=' +
+    encodeURIComponent('https://poshmark.com/closet/' + POSH_USER + '?ref=listings');
+
+  // Fallback cards shown while loading or if fetch fails
+  var fallbacks = [
+    { emoji: '👜', brand: 'Coach', name: 'Vintage Slim Zip', price: '$180', tag: 'Vintage', bg: 'linear-gradient(135deg,#FFE8F0,#FFD8A0)' },
+    { emoji: '👝', brand: 'Dooney & Bourke', name: 'Signature Crossbody', price: '$75', tag: 'Vintage', bg: 'linear-gradient(135deg,#E4FAFF,#D8C8FF)' },
+    { emoji: '💼', brand: 'Coach', name: 'Leather Satchel', price: '$220', tag: 'New', bg: 'linear-gradient(135deg,#FFFFF0,#B8FFE8)' },
+    { emoji: '👛', brand: 'Patricia Nash', name: 'London Saddle Bag', price: '$70', tag: "Glo's Pick", bg: 'linear-gradient(135deg,#FFE8F0,#FFD0C0)' },
+    { emoji: '🧣', brand: 'Boutique', name: 'Leopard Scarf', price: '$28', tag: 'New', bg: 'linear-gradient(135deg,#E4F0FF,#E0D4FF)' },
+    { emoji: '💍', brand: 'Accessories', name: 'Gold Statement Necklace', price: '$34', tag: "Glo's Pick", bg: 'linear-gradient(135deg,#F0FFE8,#FFE0F8)' }
+  ];
+
+  function renderFallbacks() {
+    grid.innerHTML = fallbacks.map(function(item) {
+      return '<a href="' + POSH_URL + '" target="_blank" class="posh-live-card">' +
+        '<div class="plc-img" style="background:' + item.bg + '">' + item.emoji + '</div>' +
+        '<div class="plc-info">' +
+          '<div class="plc-brand">' + item.brand + '</div>' +
+          '<div class="plc-name">' + item.name + '</div>' +
+          '<div class="plc-price">' + item.price + '</div>' +
+        '</div>' +
+        '<div class="plc-badge">' + item.tag + '</div>' +
+      '</a>';
+    }).join('');
+  }
+
+  // Try to fetch live listings via Poshmark's HTML (parse OG images)
+  // If CORS proxy works, parse real listing data
+  fetch(feedUrl, { signal: AbortSignal.timeout(5000) })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (!data || !data.contents) { renderFallbacks(); return; }
+
+      // Parse listing images and prices from HTML
+      var html = data.contents;
+      var imgMatches = html.match(/data-et-prop-listing_id[^>]+src="([^"]+listing[^"]+)"/g) || [];
+      var priceMatches = html.match(/\$[\d,]+/g) || [];
+      var titleMatches = html.match(/listing-item__title[^>]*>([^<]+)</g) || [];
+
+      if (imgMatches.length < 3) { renderFallbacks(); return; }
+
+      // Build cards from parsed data
+      var cards = imgMatches.slice(0, 6).map(function(m, i) {
+        var imgSrc = m.match(/src="([^"]+)"/);
+        var price  = priceMatches[i] || '$—';
+        var title  = titleMatches[i] ? titleMatches[i].replace(/listing-item__title[^>]*>/, '').trim() : 'View listing';
+        return '<a href="' + POSH_URL + '" target="_blank" class="posh-live-card">' +
+          '<div class="plc-img plc-img-real"><img src="' + (imgSrc ? imgSrc[1] : '') + '" alt="' + title + '" loading="lazy" onerror="this.parentElement.innerHTML=\'👜\'"></div>' +
+          '<div class="plc-info">' +
+            '<div class="plc-brand">GlowingInCoach</div>' +
+            '<div class="plc-name">' + title.substring(0, 32) + (title.length > 32 ? '…' : '') + '</div>' +
+            '<div class="plc-price">' + price + '</div>' +
+          '</div>' +
+        '</a>';
+      });
+      grid.innerHTML = cards.join('');
+    })
+    .catch(function() { renderFallbacks(); });
+})();
+</script>
 
 {% schema %}
 {
-  "name": "Instagram Feed",
-  "max_blocks": 6,
+  "name": "Poshmark CTA",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Follow the" },
-    { "type": "text", "id": "title_em", "label": "Title Emphasis", "default": "Glow" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Shop our looks and get first access to new drops on Instagram" },
-    { "type": "url", "id": "instagram_url", "label": "Instagram URL" }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop My Closet" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Find your next" },
+    { "type": "text", "id": "title_em", "label": "Title emphasis", "default": "favourite bag." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Browse authenticated vintage Coach bags, designer handbags & fashion finds. New listings added every week." },
+    { "type": "text", "id": "poshmark_username", "label": "Poshmark username", "default": "glowingincoach", "info": "Just your username, no @ symbol" },
+    { "type": "url", "id": "poshmark_url", "label": "Poshmark closet URL" },
+    { "type": "text", "id": "listing_count", "label": "Listing count (for display)", "default": "246+" },
+    { "type": "text", "id": "btn_text", "label": "Button 1 text", "default": "Visit My Poshmark Closet ↗" },
+    { "type": "url", "id": "btn2_url", "label": "Button 2 URL (shop this site)" },
+    { "type": "text", "id": "btn2_text", "label": "Button 2 text", "default": "Shop Here Instead" }
   ],
-  "blocks": [
-    {
-      "type": "post",
-      "name": "Instagram Post",
-      "settings": [
-        { "type": "image_picker", "id": "image", "label": "Post Image" },
-        { "type": "url", "id": "link", "label": "Post Link" }
-      ]
-    }
-  ],
-  "presets": [{ "name": "Instagram Feed" }]
+  "presets": [{ "name": "Poshmark CTA" }]
 }
 {% endschema %}
