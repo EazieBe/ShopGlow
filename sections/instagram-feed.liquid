@@ -50,117 +50,89 @@
 </section>
 
 <script>
-// ── Exact same pattern as your working index.html ──────────────
 (function() {
-  var POSHMARK_USERNAME = 'glowingincoach';
-  var CLOSET_URL = 'https://poshmark.com/closet/' + POSHMARK_USERNAME;
-
-  var PROXIES = [
-    function(u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); },
-    function(u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); }
-  ];
-
-  var FALLBACK = [
-    { id:'69508cbaa0dc2b17fe72a44c', title:'Bone & Black Vintage Coach Slim Zip No. 6018',     price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69508cbaa0dc2b17fe72a44c/s_69508d237ac6295bbc669406.jpg' },
-    { id:'69606e901986c28e4a3da9d0', title:'Red & Tan Dooney & Bourke Signature Crossbody',     price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/08/69606e901986c28e4a3da9d0/s_69606f69c71ba1e35c8023bf.jpg' },
-    { id:'69686da2243dae047ef690da', title:'Patricia Nash London Saddle Crossbody Bag',          price:70,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/14/69686da2243dae047ef690da/s_69686de7310f1cfb68c34281.jpg' },
-    { id:'695c91fdd8024c91fe06001e', title:'Michael Kors White & Tan Leather Bucket Bag',       price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/05/695c91fdd8024c91fe06001e/s_695c92748500126b86bca764.jpg' },
-    { id:'69507c7921bd42426d0ebd28', title:'Vintage Coach Anderson 9976 in Navy Blue',           price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69507c7921bd42426d0ebd28/s_69507ce2d8024cef49197a4d.jpg' },
-    { id:'698d0a434a072b4e13b877d4', title:'Vintage Coach 9997 Black Leather Shoulder Bag',     price:232, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/02/11/698d0a434a072b4e13b877d4/s_698d0ac42981afd25f8675aa.jpg' },
-    { id:'698c0df39553834d49f58f08', title:'Coach 9932 Vintage USA Brown Leather Flap Bag',     price:245, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/02/10/698c0df39553834d49f58f08/s_698c0e6005deb336016abb0e.jpg' },
-    { id:'695c6efa006e43138cd924cf', title:'Dark Gray/Black Vintage Dooney & Bourke Handbag',  price:120, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/05/695c6efa006e43138cd924cf/s_695c6f185919e0d46c36265b.jpg' }
-  ];
-
-  var grid = document.getElementById('posh-feed-grid');
+  var USERNAME  = 'glowingincoach';
+  var CLOSET    = 'https://poshmark.com/closet/' + USERNAME;
+  var grid      = document.getElementById('posh-feed-grid');
   if (!grid) return;
+
+  // Real photos from your actual Poshmark CDN — always show these as base
+  var FALLBACK = [
+    { id:'69508cbaa0dc2b17fe72a44c', title:'Bone & Black Vintage Coach Slim Zip',          price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69508cbaa0dc2b17fe72a44c/s_69508d237ac6295bbc669406.jpg' },
+    { id:'69606e901986c28e4a3da9d0', title:'Red & Tan Dooney & Bourke Crossbody',          price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/08/69606e901986c28e4a3da9d0/s_69606f69c71ba1e35c8023bf.jpg' },
+    { id:'69686da2243dae047ef690da', title:'Patricia Nash London Saddle Bag',               price:70,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/14/69686da2243dae047ef690da/s_69686de7310f1cfb68c34281.jpg' },
+    { id:'695c91fdd8024c91fe06001e', title:'Michael Kors White & Tan Bucket Bag',          price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/05/695c91fdd8024c91fe06001e/s_695c92748500126b86bca764.jpg' },
+    { id:'69507c7921bd42426d0ebd28', title:'Vintage Coach Anderson 9976 Navy Blue',        price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69507c7921bd42426d0ebd28/s_69507ce2d8024cef49197a4d.jpg' },
+    { id:'698d0a434a072b4e13b877d4', title:'Vintage Coach 9997 Black Leather Shoulder',   price:232, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/02/11/698d0a434a072b4e13b877d4/s_698d0ac42981afd25f8675aa.jpg' }
+  ];
 
   function fmt(n) {
     n = parseInt(n) || 0;
-    return n >= 1000 ? (n / 1000).toFixed(1).replace('.0', '') + 'K' : String(n);
+    return n >= 1000 ? (n/1000).toFixed(1).replace('.0','') + 'K' : String(n);
   }
 
-  function renderListings(listings) {
-    var cards = listings.slice(0, 6).map(function(item) {
+  function renderCards(items) {
+    grid.innerHTML = items.slice(0,6).map(function(item) {
       var img   = item.cover_shot ? (item.cover_shot.url_small || item.cover_shot.url || '') : (item.img || '');
-      var price = item.price_amount ? parseFloat(item.price_amount.val || 0).toFixed(0) : String(item.price || '');
+      var price = item.price_amount ? parseFloat(item.price_amount.val||0).toFixed(0) : String(item.price||'');
       var title = item.title || item.name || '';
-      var link  = item.id ? 'https://poshmark.com/listing/' + item.id : CLOSET_URL;
-      return '<a href="' + link + '" target="_blank" rel="noopener" class="posh-live-card">' +
+      var link  = item.id ? 'https://poshmark.com/listing/' + item.id : CLOSET;
+      return '<a href="'+link+'" target="_blank" rel="noopener" class="posh-live-card">' +
         '<div class="plc-img plc-img-real">' +
-          '<img src="' + img + '" alt="' + title.replace(/"/g, '') + '" loading="lazy" ' +
+          '<img src="'+img+'" alt="'+title.replace(/"/g,'')+'" loading="lazy" ' +
           'onerror="this.parentElement.innerHTML=\'👜\'">' +
         '</div>' +
         '<div class="plc-info">' +
-          '<div class="plc-name">' + title.substring(0, 40) + (title.length > 40 ? '…' : '') + '</div>' +
-          '<div class="plc-price">$' + price + '</div>' +
+          '<div class="plc-name">'+title.substring(0,38)+(title.length>38?'…':'')+'</div>' +
+          '<div class="plc-price">$'+price+'</div>' +
         '</div>' +
       '</a>';
-    });
-    grid.innerHTML = cards.join('');
+    }).join('');
   }
 
-  function updateStats(aggregates) {
-    var a = aggregates || {};
+  function updateStats(agg) {
     var elL = document.getElementById('posh-stat-listings');
     var elF = document.getElementById('posh-stat-followers');
     var elS = document.getElementById('posh-stat-shares');
-    if (elL && (a.total_posts || a.posts)) elL.textContent = fmt(a.total_posts || a.posts) + '+';
-    if (elF && a.followers)               elF.textContent = fmt(a.followers);
-    if (elS && a.shares)                  elS.textContent = fmt(a.shares);
+    if (elL && (agg.total_posts||agg.posts)) elL.textContent = fmt(agg.total_posts||agg.posts)+'+';
+    if (elF && agg.followers)               elF.textContent = fmt(agg.followers);
+    if (elS && agg.shares)                  elS.textContent = fmt(agg.shares);
   }
 
-  function showFallback() {
-    renderListings(FALLBACK);
+  // Show real photos immediately — no waiting
+  renderCards(FALLBACK);
+
+  // Then try to upgrade to live data in the background
+  // Use allorigins /get endpoint (returns JSON wrapper with CORS headers)
+  var PROFILE_URL = 'https://poshmark.com/vm/closet/userinfo?username='+USERNAME;
+  var FEED_URL    = 'https://poshmark.com/vm/closet/feed?username='+USERNAME+'&max_id=0&summarize=true';
+
+  function alloriginsGet(url) {
+    return fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url))
+      .then(function(r) { return r.json(); })
+      .then(function(d) { return JSON.parse(d.contents); });
   }
 
-  // Try each proxy in order — exactly like your index.html
-  var PROFILE_URL = 'https://poshmark.com/vm/closet/userinfo?username=' + POSHMARK_USERNAME;
-  var FEED_URL    = 'https://poshmark.com/vm/closet/feed?username=' + POSHMARK_USERNAME + '&max_id=0&summarize=true';
+  // Try profile stats
+  alloriginsGet(PROFILE_URL)
+    .then(function(data) {
+      var agg = (data.data || data).aggregates;
+      if (agg) updateStats(agg);
+    })
+    .catch(function() {}); // Silent fail — hardcoded stats stay
 
-  var proxyIndex = 0;
+  // Try live listings
+  alloriginsGet(FEED_URL)
+    .then(function(data) {
+      var listings = data.data || data || [];
+      var available = listings.filter(function(i) {
+        return (i.inventory && i.inventory.status === 'available') || i.status === 'available';
+      });
+      if (available.length > 0) renderCards(available);
+      // else keep the fallback already showing
+    })
+    .catch(function() {}); // Silent fail — fallback photos stay
 
-  function tryNextProxy() {
-    if (proxyIndex >= PROXIES.length) {
-      showFallback();
-      return;
-    }
-    var proxy = PROXIES[proxyIndex];
-    proxyIndex++;
-
-    Promise.all([
-      fetch(proxy(PROFILE_URL)).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }),
-      fetch(proxy(FEED_URL)).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
-    ]).then(function(results) {
-      var profileData  = results[0];
-      var feedData     = results[1];
-
-      // Update stats if profile loaded
-      if (profileData) {
-        var agg = (profileData.data || profileData).aggregates;
-        if (agg) updateStats(agg);
-      }
-
-      // Render listings if feed loaded
-      if (feedData) {
-        var listings = feedData.data || feedData || [];
-        var available = listings.filter(function(i) {
-          return (i.inventory && i.inventory.status === 'available') || i.status === 'available';
-        });
-        if (available.length > 0) {
-          renderListings(available);
-          return;
-        }
-      }
-
-      // Neither worked — try next proxy
-      tryNextProxy();
-    }).catch(function() {
-      tryNextProxy();
-    });
-  }
-
-  // Kick it off
-  tryNextProxy();
 })();
 </script>
 
