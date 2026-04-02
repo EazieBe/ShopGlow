@@ -1,9 +1,7 @@
 <section class="gic-poshmark-cta">
   <div class="posh-cta-bg"></div>
-
   <div class="posh-cta-inner">
 
-    <!-- LEFT: copy + live stats + buttons -->
     <div class="posh-cta-content">
       <div class="posh-eyebrow">✦ {{ section.settings.eyebrow }}</div>
       <h2 class="posh-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
@@ -24,14 +22,12 @@
            class="btn-gold posh-btn" target="_blank" rel="noopener">
           {{ section.settings.btn_text }}
         </a>
-        <a href="{{ section.settings.btn2_url | default: routes.collections_url }}"
-           class="posh-btn-ghost">
+        <a href="{{ section.settings.btn2_url | default: routes.collections_url }}" class="posh-btn-ghost">
           {{ section.settings.btn2_text }}
         </a>
       </div>
     </div>
 
-    <!-- RIGHT: Live Poshmark grid -->
     <div class="posh-live-feed">
       <div class="posh-feed-header">
         <span class="posh-feed-label">✦ Live from my closet</span>
@@ -47,109 +43,124 @@
         <div class="posh-skeleton"></div>
       </div>
       <a href="{{ section.settings.poshmark_url | default: 'https://poshmark.com/closet/glowingincoach' }}"
-         class="posh-see-all" target="_blank" rel="noopener">
-        See all listings →
-      </a>
+         class="posh-see-all" target="_blank" rel="noopener">See all listings →</a>
     </div>
 
   </div>
 </section>
 
 <script>
+// ── Exact same pattern as your working index.html ──────────────
 (function() {
-  var USERNAME = 'glowingincoach';
-  var CLOSET   = 'https://poshmark.com/closet/' + USERNAME;
-  var grid     = document.getElementById('posh-feed-grid');
-  if (!grid) return;
-
-  // Real fallback listings from your actual Poshmark CDN
-  var FALLBACK = [
-    { id:'69508cbaa0dc2b17fe72a44c', title:'Bone & Black Vintage Coach Slim Zip No. 6018',      price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69508cbaa0dc2b17fe72a44c/s_69508d237ac6295bbc669406.jpg' },
-    { id:'69606e901986c28e4a3da9d0', title:'Red & Tan Dooney & Bourke Signature Crossbody',      price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/08/69606e901986c28e4a3da9d0/s_69606f69c71ba1e35c8023bf.jpg' },
-    { id:'69686da2243dae047ef690da', title:'Patricia Nash London Saddle Crossbody Bag',           price:70,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/14/69686da2243dae047ef690da/s_69686de7310f1cfb68c34281.jpg' },
-    { id:'695c91fdd8024c91fe06001e', title:'Michael Kors White & Tan Leather Bucket Bag',        price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/05/695c91fdd8024c91fe06001e/s_695c92748500126b86bca764.jpg' },
-    { id:'69507c7921bd42426d0ebd28', title:'Vintage Coach Anderson 9976 in Navy Blue',            price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69507c7921bd42426d0ebd28/s_69507ce2d8024cef49197a4d.jpg' },
-    { id:'698d0a434a072b4e13b877d4', title:'Vintage Coach 9997 Black Leather Shoulder Bag',      price:232, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/02/11/698d0a434a072b4e13b877d4/s_698d0ac42981afd25f8675aa.jpg' },
-    { id:'698c0df39553834d49f58f08', title:'Coach 9932 Vintage USA Brown Leather Flap Bag',      price:245, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/02/10/698c0df39553834d49f58f08/s_698c0e6005deb336016abb0e.jpg' },
-    { id:'695c6efa006e43138cd924cf', title:'Dark Gray/Black Vintage Dooney & Bourke Handbag',   price:120, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/05/695c6efa006e43138cd924cf/s_695c6f185919e0d46c36265b.jpg' },
-    { id:'69508cbaa0dc2b17fe72a44c', title:'Vintage Coach Slim Zip Billfold Wallet',             price:95,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69508cbaa0dc2b17fe72a44c/s_69508d237ac6295bbc669406.jpg' },
-  ];
+  var POSHMARK_USERNAME = 'glowingincoach';
+  var CLOSET_URL = 'https://poshmark.com/closet/' + POSHMARK_USERNAME;
 
   var PROXIES = [
-    function(u){ return 'https://corsproxy.io/?' + encodeURIComponent(u); },
-    function(u){ return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); }
+    function(u) { return 'https://corsproxy.io/?' + encodeURIComponent(u); },
+    function(u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); }
   ];
 
-  var fmt = function(n) {
-    n = parseInt(n) || 0;
-    return n >= 1000 ? (n/1000).toFixed(1).replace('.0','') + 'K' : String(n);
-  };
+  var FALLBACK = [
+    { id:'69508cbaa0dc2b17fe72a44c', title:'Bone & Black Vintage Coach Slim Zip No. 6018',     price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69508cbaa0dc2b17fe72a44c/s_69508d237ac6295bbc669406.jpg' },
+    { id:'69606e901986c28e4a3da9d0', title:'Red & Tan Dooney & Bourke Signature Crossbody',     price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/08/69606e901986c28e4a3da9d0/s_69606f69c71ba1e35c8023bf.jpg' },
+    { id:'69686da2243dae047ef690da', title:'Patricia Nash London Saddle Crossbody Bag',          price:70,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/14/69686da2243dae047ef690da/s_69686de7310f1cfb68c34281.jpg' },
+    { id:'695c91fdd8024c91fe06001e', title:'Michael Kors White & Tan Leather Bucket Bag',       price:75,  img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/05/695c91fdd8024c91fe06001e/s_695c92748500126b86bca764.jpg' },
+    { id:'69507c7921bd42426d0ebd28', title:'Vintage Coach Anderson 9976 in Navy Blue',           price:180, img:'https://di2ponv0v5otw.cloudfront.net/posts/2025/12/27/69507c7921bd42426d0ebd28/s_69507ce2d8024cef49197a4d.jpg' },
+    { id:'698d0a434a072b4e13b877d4', title:'Vintage Coach 9997 Black Leather Shoulder Bag',     price:232, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/02/11/698d0a434a072b4e13b877d4/s_698d0ac42981afd25f8675aa.jpg' },
+    { id:'698c0df39553834d49f58f08', title:'Coach 9932 Vintage USA Brown Leather Flap Bag',     price:245, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/02/10/698c0df39553834d49f58f08/s_698c0e6005deb336016abb0e.jpg' },
+    { id:'695c6efa006e43138cd924cf', title:'Dark Gray/Black Vintage Dooney & Bourke Handbag',  price:120, img:'https://di2ponv0v5otw.cloudfront.net/posts/2026/01/05/695c6efa006e43138cd924cf/s_695c6f185919e0d46c36265b.jpg' }
+  ];
 
-  function renderCards(items) {
-    grid.innerHTML = items.slice(0, 6).map(function(item) {
+  var grid = document.getElementById('posh-feed-grid');
+  if (!grid) return;
+
+  function fmt(n) {
+    n = parseInt(n) || 0;
+    return n >= 1000 ? (n / 1000).toFixed(1).replace('.0', '') + 'K' : String(n);
+  }
+
+  function renderListings(listings) {
+    var cards = listings.slice(0, 6).map(function(item) {
       var img   = item.cover_shot ? (item.cover_shot.url_small || item.cover_shot.url || '') : (item.img || '');
-      var price = item.price_amount ? parseFloat(item.price_amount.val || 0).toFixed(0) : item.price;
+      var price = item.price_amount ? parseFloat(item.price_amount.val || 0).toFixed(0) : String(item.price || '');
       var title = item.title || item.name || '';
-      var id    = item.id || '';
-      var link  = id ? 'https://poshmark.com/listing/' + id : CLOSET;
+      var link  = item.id ? 'https://poshmark.com/listing/' + item.id : CLOSET_URL;
       return '<a href="' + link + '" target="_blank" rel="noopener" class="posh-live-card">' +
         '<div class="plc-img plc-img-real">' +
-          '<img src="' + img + '" alt="' + title.replace(/"/g,'') + '" loading="lazy" ' +
-            'onerror="this.parentElement.innerHTML=\'👜\';this.parentElement.style.fontSize=\'2.5rem\';this.parentElement.style.display=\'flex\';this.parentElement.style.alignItems=\'center\';this.parentElement.style.justifyContent=\'center\'">' +
+          '<img src="' + img + '" alt="' + title.replace(/"/g, '') + '" loading="lazy" ' +
+          'onerror="this.parentElement.innerHTML=\'👜\'">' +
         '</div>' +
         '<div class="plc-info">' +
-          '<div class="plc-name">' + title.substring(0,38) + (title.length>38?'…':'') + '</div>' +
+          '<div class="plc-name">' + title.substring(0, 40) + (title.length > 40 ? '…' : '') + '</div>' +
           '<div class="plc-price">$' + price + '</div>' +
         '</div>' +
       '</a>';
-    }).join('');
+    });
+    grid.innerHTML = cards.join('');
   }
 
-  function renderFallback() { renderCards(FALLBACK); }
+  function updateStats(aggregates) {
+    var a = aggregates || {};
+    var elL = document.getElementById('posh-stat-listings');
+    var elF = document.getElementById('posh-stat-followers');
+    var elS = document.getElementById('posh-stat-shares');
+    if (elL && (a.total_posts || a.posts)) elL.textContent = fmt(a.total_posts || a.posts) + '+';
+    if (elF && a.followers)               elF.textContent = fmt(a.followers);
+    if (elS && a.shares)                  elS.textContent = fmt(a.shares);
+  }
 
-  async function tryLoadLive() {
-    var FEED_URL    = 'https://poshmark.com/vm/closet/feed?username=' + USERNAME + '&max_id=0&summarize=true';
-    var PROFILE_URL = 'https://poshmark.com/vm/closet/userinfo?username=' + USERNAME;
+  function showFallback() {
+    renderListings(FALLBACK);
+  }
 
-    for (var i = 0; i < PROXIES.length; i++) {
-      try {
-        var res = await fetch(PROXIES[i](FEED_URL));
-        if (!res.ok) continue;
-        var json = await res.json();
-        var listings = json.data || json || [];
-        var available = listings.filter(function(x) {
-          return (x.inventory && x.inventory.status === 'available') || x.status === 'available';
+  // Try each proxy in order — exactly like your index.html
+  var PROFILE_URL = 'https://poshmark.com/vm/closet/userinfo?username=' + POSHMARK_USERNAME;
+  var FEED_URL    = 'https://poshmark.com/vm/closet/feed?username=' + POSHMARK_USERNAME + '&max_id=0&summarize=true';
+
+  var proxyIndex = 0;
+
+  function tryNextProxy() {
+    if (proxyIndex >= PROXIES.length) {
+      showFallback();
+      return;
+    }
+    var proxy = PROXIES[proxyIndex];
+    proxyIndex++;
+
+    Promise.all([
+      fetch(proxy(PROFILE_URL)).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; }),
+      fetch(proxy(FEED_URL)).then(function(r) { return r.ok ? r.json() : null; }).catch(function() { return null; })
+    ]).then(function(results) {
+      var profileData  = results[0];
+      var feedData     = results[1];
+
+      // Update stats if profile loaded
+      if (profileData) {
+        var agg = (profileData.data || profileData).aggregates;
+        if (agg) updateStats(agg);
+      }
+
+      // Render listings if feed loaded
+      if (feedData) {
+        var listings = feedData.data || feedData || [];
+        var available = listings.filter(function(i) {
+          return (i.inventory && i.inventory.status === 'available') || i.status === 'available';
         });
         if (available.length > 0) {
-          renderCards(available);
-
-          // Also try to update stats
-          try {
-            var pRes = await fetch(PROXIES[i](PROFILE_URL));
-            if (pRes.ok) {
-              var pJson = await pRes.json();
-              var agg = (pJson.data || pJson).aggregates || {};
-              var elL = document.getElementById('posh-stat-listings');
-              var elF = document.getElementById('posh-stat-followers');
-              var elS = document.getElementById('posh-stat-shares');
-              if (elL && (agg.total_posts || agg.posts)) elL.textContent = fmt(agg.total_posts || agg.posts) + '+';
-              if (elF && agg.followers) elF.textContent = fmt(agg.followers);
-              if (elS && agg.shares)    elS.textContent = fmt(agg.shares);
-            }
-          } catch(e) {}
+          renderListings(available);
           return;
         }
-      } catch(e) { continue; }
-    }
-    renderFallback();
+      }
+
+      // Neither worked — try next proxy
+      tryNextProxy();
+    }).catch(function() {
+      tryNextProxy();
+    });
   }
 
-  // Try live feed, fallback to real hardcoded listings if it fails
-  if (typeof fetch !== 'undefined') {
-    tryLoadLive().catch(renderFallback);
-  } else {
-    renderFallback();
-  }
+  // Kick it off
+  tryNextProxy();
 })();
 </script>
 
