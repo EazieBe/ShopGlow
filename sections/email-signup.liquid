@@ -2,43 +2,42 @@
   <div class="why-inner">
 
     <div class="why-left">
-      <div class="sec-eyebrow">Why Shop With Glo</div>
-      <h2 class="sec-title">Trusted by <em>thousands</em> of happy shoppers.</h2>
-      <p class="why-sub">Every bag is personally authenticated, carefully described, and shipped with love. No surprises — just beautiful finds.</p>
+      <div class="sec-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="sec-title">{{ section.settings.title }} <em>{{ section.settings.title_em }}</em></h2>
+      <p class="why-sub">{{ section.settings.subtext }}</p>
 
       <div class="why-grid">
         {%- for block in section.blocks -%}
-          <div class="why-card" {{ block.shopify_attributes }}>
-            <div class="why-icon">{{ block.settings.icon }}</div>
-            <div class="why-title">{{ block.settings.title }}</div>
-            <div class="why-text">{{ block.settings.text }}</div>
-          </div>
+          {%- if block.type == 'reason' -%}
+            <div class="why-card" {{ block.shopify_attributes }}>
+              <div class="why-icon">{{ block.settings.icon }}</div>
+              <div class="why-title">{{ block.settings.title }}</div>
+              <div class="why-text">{{ block.settings.text }}</div>
+            </div>
+          {%- endif -%}
         {%- endfor -%}
       </div>
     </div>
 
     <div class="why-right">
       <div class="why-review-stack">
+
         <div class="why-big-stat">
-          <span class="why-big-num">5.0</span>
+          <span class="why-big-num">{{ section.settings.rating_number }}</span>
           <div class="why-stars">⭐⭐⭐⭐⭐</div>
-          <div class="why-stat-label">Average seller rating</div>
+          <div class="why-stat-label">{{ section.settings.rating_label }}</div>
         </div>
-        <div class="why-review">
-          <div class="why-rev-stars">⭐⭐⭐⭐⭐</div>
-          <p class="why-rev-text">"Bag arrived exactly as described — absolutely beautiful. Glo packages everything so carefully. Will definitely buy again!"</p>
-          <div class="why-rev-by">— Verified Poshmark Buyer</div>
-        </div>
-        <div class="why-review">
-          <div class="why-rev-stars">⭐⭐⭐⭐⭐</div>
-          <p class="why-rev-text">"Fast shipping, gorgeous vintage Coach bag in perfect condition. Glo knows her stuff — completely trustworthy seller."</p>
-          <div class="why-rev-by">— Verified Poshmark Buyer</div>
-        </div>
-        <div class="why-review">
-          <div class="why-rev-stars">⭐⭐⭐⭐⭐</div>
-          <p class="why-rev-text">"Third purchase and every single one has exceeded expectations. My go-to for designer bags. Love love love!"</p>
-          <div class="why-rev-by">— Verified Poshmark Buyer</div>
-        </div>
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            <div class="why-review" {{ block.shopify_attributes }}>
+              <div class="why-rev-stars">⭐⭐⭐⭐⭐</div>
+              <p class="why-rev-text">"{{ block.settings.review_text }}"</p>
+              <div class="why-rev-by">— {{ block.settings.reviewer_name }}</div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
       </div>
     </div>
 
@@ -48,14 +47,40 @@
 {% schema %}
 {
   "name": "Why Shop With Glo",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow label", "default": "Why Shop With Glo" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Trusted by" },
+    { "type": "text", "id": "title_em", "label": "Title emphasis", "default": "thousands of happy shoppers." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Every bag is personally authenticated, carefully described, and shipped with love. No surprises — just beautiful finds." },
+    { "type": "text", "id": "rating_number", "label": "Rating number", "default": "5.0" },
+    { "type": "text", "id": "rating_label", "label": "Rating label", "default": "Average seller rating" }
+  ],
   "blocks": [
     {
       "type": "reason",
-      "name": "Reason",
+      "name": "✅ Trust Reason",
       "settings": [
         { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "✅" },
         { "type": "text", "id": "title", "label": "Title", "default": "Authenticated" },
-        { "type": "textarea", "id": "text", "label": "Description", "default": "Every vintage piece is personally verified before listing." }
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Every vintage piece personally verified before listing." }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "⭐ Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review text",
+          "info": "Paste the exact words your buyer wrote"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer name",
+          "info": "e.g. '@username' or 'Verified Poshmark Buyer'"
+        }
       ]
     }
   ],
@@ -65,7 +90,10 @@
       { "type": "reason", "settings": { "icon": "✅", "title": "100% Authenticated", "text": "Every vintage Coach bag personally verified before listing." } },
       { "type": "reason", "settings": { "icon": "🚚", "title": "Fast Shipping", "text": "Ships within 1-2 days, beautifully packaged every time." } },
       { "type": "reason", "settings": { "icon": "💛", "title": "Handpicked by Glo", "text": "Only pieces I personally love make it into the closet." } },
-      { "type": "reason", "settings": { "icon": "↩️", "title": "Easy Returns", "text": "14-day return policy, no questions asked." } }
+      { "type": "reason", "settings": { "icon": "↩️", "title": "Easy Returns", "text": "14-day return policy, no questions asked." } },
+      { "type": "review", "settings": { "review_text": "Thank you for the fabulous items and the fast shipping. Everything was amazing, as usual. Such a great closet and awesome deals! Thank you! 😊", "reviewer_name": "@alexandercal493 · Verified Buyer" } },
+      { "type": "review", "settings": { "review_text": "Don't sleep on this seller! She has amazing items for amazing prices she's the sweetest and the kindest friend 💜 I love my package so much 💜💜", "reviewer_name": "@mckaysfinds · Verified Buyer" } },
+      { "type": "review", "settings": { "review_text": "I'm one happy buyer and customer. Glow is such an awesome seller and friend that I love supporting her as much as I can. Her packages are always filled with lots of love 💕. Thank you for my goodies Glow 🤗", "reviewer_name": "@ljanette2 · Verified Buyer" } }
     ]
   }]
 }
