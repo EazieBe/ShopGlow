@@ -1092,3 +1092,42 @@ html, body { background: #FFF9F5 !important; }
 @media (max-width: 900px) {
   .posh-feed-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+
+/* ── CURSOR — hide on touch/mobile, fix stray dots ──────────── */
+#gic-cursor, #gic-cursor-dot, .gic-cursor, .gic-cursor-dot {
+  display: none !important;
+}
+@media (pointer: fine) and (hover: hover) {
+  #gic-cursor, .gic-cursor {
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 2px solid var(--gold, #C9A84C) !important;
+    border-radius: 50% !important;
+    position: fixed !important;
+    pointer-events: none !important;
+    z-index: 99998 !important;
+    transform: translate(-50%, -50%) !important;
+    transition: width 0.2s, height 0.2s !important;
+    background: transparent !important;
+    mix-blend-mode: normal !important;
+  }
+  #gic-cursor-dot, .gic-cursor-dot {
+    display: block !important;
+    width: 4px !important;
+    height: 4px !important;
+    background: var(--gold, #C9A84C) !important;
+    border-radius: 50% !important;
+    position: fixed !important;
+    pointer-events: none !important;
+    z-index: 99998 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+/* Hide the loading spinner circle that appears as empty ring */
+.gic-hero .hero-orb, .hero-orb { opacity: 1; }
+/* Hide stray empty circles from cursor before JS runs */
+body > div[style*="border-radius: 50%"]:not(#gic-loader) {
+  display: none !important;
+}
