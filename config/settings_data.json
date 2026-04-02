@@ -86,10 +86,18 @@
       "instagram-feed": {
         "type": "instagram-feed",
         "settings": {
+          "eyebrow": "Shop My Closet",
+          "stat_listings": "306+",
+          "stat_followers": "21,959",
+          "stat_rating": "5★",
+          "stat_shares": "32,367+",
           "title": "Follow the",
           "title_em": "Glow",
-          "subtitle": "Shop our looks and get first access to new drops on Instagram",
-          "instagram_url": ""
+          "subtext": "Browse authenticated vintage Coach bags, designer handbags & fashion finds. New listings added every week.",
+          "poshmark_url": "https://poshmark.com/closet/glowingincoach",
+          "btn_text": "Visit My Poshmark Closet ↗",
+          "btn2_url": "shopify://collections",
+          "btn2_text": "Shop This Site"
         }
       },
       "glo-edit": {
