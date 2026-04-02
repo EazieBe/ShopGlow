@@ -8,13 +8,13 @@
       <p class="posh-sub">{{ section.settings.subtext }}</p>
 
       <div class="posh-stats">
-        <div class="posh-stat"><span class="posh-stat-n" id="posh-stat-listings">246+</span><span class="posh-stat-l">Listings</span></div>
+        <div class="posh-stat"><span class="posh-stat-n">{{ section.settings.stat_listings }}</span><span class="posh-stat-l">Listings</span></div>
         <div class="posh-stat-div"></div>
-        <div class="posh-stat"><span class="posh-stat-n" id="posh-stat-followers">16.5K</span><span class="posh-stat-l">Followers</span></div>
+        <div class="posh-stat"><span class="posh-stat-n">{{ section.settings.stat_followers }}</span><span class="posh-stat-l">Followers</span></div>
         <div class="posh-stat-div"></div>
-        <div class="posh-stat"><span class="posh-stat-n">5★</span><span class="posh-stat-l">Rating</span></div>
+        <div class="posh-stat"><span class="posh-stat-n">{{ section.settings.stat_rating }}</span><span class="posh-stat-l">Rating</span></div>
         <div class="posh-stat-div"></div>
-        <div class="posh-stat"><span class="posh-stat-n" id="posh-stat-shares">17.8K</span><span class="posh-stat-l">Shares</span></div>
+        <div class="posh-stat"><span class="posh-stat-n">{{ section.settings.stat_shares }}</span><span class="posh-stat-l">Shares</span></div>
       </div>
 
       <div class="posh-cta-btns">
@@ -90,22 +90,14 @@
     }).join('');
   }
 
-  function updateStats(agg) {
-    var elL = document.getElementById('posh-stat-listings');
-    var elF = document.getElementById('posh-stat-followers');
-    var elS = document.getElementById('posh-stat-shares');
-    if (elL && (agg.total_posts||agg.posts)) elL.textContent = fmt(agg.total_posts||agg.posts)+'+';
-    if (elF && agg.followers)               elF.textContent = fmt(agg.followers);
-    if (elS && agg.shares)                  elS.textContent = fmt(agg.shares);
-  }
+  // Stats managed via Customize settings
 
   // Show real photos immediately — no waiting
   renderCards(FALLBACK);
 
   // Then try to upgrade to live data in the background
   // Use allorigins /get endpoint (returns JSON wrapper with CORS headers)
-  var PROFILE_URL = 'https://poshmark.com/vm/closet/userinfo?username='+USERNAME;
-  var FEED_URL    = 'https://poshmark.com/vm/closet/feed?username='+USERNAME+'&max_id=0&summarize=true';
+  var FEED_URL = 'https://poshmark.com/vm/closet/feed?username='+USERNAME+'&max_id=0&summarize=true';
 
   function alloriginsGet(url) {
     return fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(url))
@@ -113,13 +105,7 @@
       .then(function(d) { return JSON.parse(d.contents); });
   }
 
-  // Try profile stats
-  alloriginsGet(PROFILE_URL)
-    .then(function(data) {
-      var agg = (data.data || data).aggregates;
-      if (agg) updateStats(agg);
-    })
-    .catch(function() {}); // Silent fail — hardcoded stats stay
+  // Stats are set in Customize — no fetch needed
 
   // Try live listings
   alloriginsGet(FEED_URL)
@@ -141,6 +127,10 @@
   "name": "Poshmark CTA",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop My Closet" },
+    { "type": "text", "id": "stat_listings", "label": "Listings count", "default": "246+" },
+    { "type": "text", "id": "stat_followers", "label": "Followers count", "default": "16.5K" },
+    { "type": "text", "id": "stat_rating", "label": "Rating", "default": "5★" },
+    { "type": "text", "id": "stat_shares", "label": "Shares count", "default": "17.8K" },
     { "type": "text", "id": "title", "label": "Title", "default": "Shop My" },
     { "type": "text", "id": "title_em", "label": "Title emphasis", "default": "Poshmark Closet." },
     { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Browse authenticated vintage Coach bags, designer handbags & fashion finds. New listings added every week." },
