@@ -52,6 +52,43 @@
       },
       "collection-grid": {
         "type": "collection-grid",
+        "blocks": {
+          "collection_8eJm6p": {
+            "type": "collection",
+            "settings": {
+              "collection": "glows-choice",
+              "label": "Glo Picks",
+              "sublabel": "Shop Now",
+              "emoji": "👜",
+              "bg_gradient": "linear-gradient(135deg,#FCE4EC,#F8BBD9)"
+            }
+          },
+          "collection_LejHhq": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "label": "Clothing",
+              "sublabel": "Shop Now",
+              "emoji": "👜",
+              "bg_gradient": "linear-gradient(135deg,#FCE4EC,#F8BBD9)"
+            }
+          },
+          "collection_TDRyVL": {
+            "type": "collection",
+            "settings": {
+              "collection": "",
+              "label": "Purses",
+              "sublabel": "Shop Now",
+              "emoji": "👜",
+              "bg_gradient": "linear-gradient(135deg,#FCE4EC,#F8BBD9)"
+            }
+          }
+        },
+        "block_order": [
+          "collection_8eJm6p",
+          "collection_LejHhq",
+          "collection_TDRyVL"
+        ],
         "settings": {
           "eyebrow": "Shop by Category",
           "title_plain": "Find Your",
@@ -113,7 +150,14 @@
       },
       "email-signup": {
         "type": "email-signup",
-        "settings": {}
+        "settings": {
+          "eyebrow": "Why Shop With Glo",
+          "title": "Trusted by",
+          "title_em": "thousands of happy shoppers.",
+          "subtext": "Every bag is personally authenticated, carefully described, and shipped with love. No surprises — just beautiful finds.",
+          "rating_number": "5.0",
+          "rating_label": "Average seller rating"
+        }
       },
       "footer": {
         "type": "footer",
