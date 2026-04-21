@@ -23,9 +23,9 @@
       "header": {
         "type": "header",
         "settings": {
-          "logo_height": 52,
+          "logo_height": 60,
           "menu": "main-menu",
-          "announcement_text": "✨ Posh Ambassador · Free Shipping $75+ · Authenticated Vintage Coach · New Drops Weekly ✨"
+          "announcement_text": "✨ Posh Ambassador · Free Shipping $75+ ·  New Drops Weekly ✨"
         }
       },
       "hero": {
