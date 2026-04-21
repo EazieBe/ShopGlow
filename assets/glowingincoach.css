@@ -50,10 +50,6 @@ ul{list-style:none;}
 .loader-bar{width:160px;height:2px;background:rgba(201,168,76,.2);border-radius:2px;margin-top:20px;overflow:hidden;}
 .loader-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;animation:loader-progress 1.8s ease forwards;}
 
-/* CURSOR */
-.gic-cursor{width:20px;height:20px;border:2px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:99999;transition:transform .1s ease,width .2s,height .2s,border-color .2s;transform:translate(-50%,-50%);mix-blend-mode:multiply;}
-.gic-cursor-dot{width:5px;height:5px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);}
-.gic-cursor.hovering{width:36px;height:36px;background:rgba(201,168,76,.12);}
 
 /* ANNOUNCEMENT */
 .gic-announcement{background:linear-gradient(135deg,#C9A84C,#F0D080,#C9A84C,#FFE566);background-size:300% 100%;animation:goldShift 5s ease infinite;color:var(--text-dark);text-align:center;padding:11px 20px;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;font-weight:800;position:relative;overflow:hidden;}
@@ -84,7 +80,7 @@ ul{list-style:none;}
 .mobile-nav-link:hover{color:var(--text-dark);background:rgba(201,168,76,.1);}
 
 /* HERO */
-.gic-hero{min-height:92vh;display:grid;grid-template-columns:1.15fr .85fr;position:relative;overflow:hidden;}
+.gic-hero{min-height:65vh;display:grid;grid-template-columns:1.15fr .85fr;position:relative;overflow:hidden;}
 .hero-ambient{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 15% 60%,rgba(255,179,217,.18) 0%,transparent 50%),radial-gradient(ellipse at 85% 25%,rgba(179,232,255,.18) 0%,transparent 50%),radial-gradient(ellipse at 50% 90%,rgba(212,179,255,.12) 0%,transparent 50%);}
 .hero-particle{position:absolute;pointer-events:none;animation:sparkle-pulse var(--duration,2.5s) ease-in-out infinite;animation-delay:var(--delay,0s);font-size:var(--size,1.4rem);opacity:.7;}
 .hero-left{padding:80px 56px 60px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;animation:fadeInUp .8s ease .3s both;}
@@ -433,7 +429,7 @@ ul{list-style:none;}
 
 /* ── HERO — full width cinematic, logo centered ──────────────── */
 .gic-hero {
-  min-height: 88vh !important;
+  min-height: 65vh !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -490,7 +486,7 @@ ul{list-style:none;}
   z-index: 2;
   max-width: 860px;
   margin: 0 auto;
-  padding: 80px 40px 60px;
+  padding: 44px 40px 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1093,36 +1089,9 @@ html, body { background: #FFF9F5 !important; }
   .posh-feed-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
-/* ── CURSOR — hide on touch/mobile, fix stray dots ──────────── */
-#gic-cursor, #gic-cursor-dot, .gic-cursor, .gic-cursor-dot {
+/* Cursor effects disabled */
+.gic-cursor, .gic-cursor-dot, #gic-cursor, #gic-cursor-dot {
   display: none !important;
-}
-@media (pointer: fine) and (hover: hover) {
-  #gic-cursor, .gic-cursor {
-    display: block !important;
-    width: 18px !important;
-    height: 18px !important;
-    border: 2px solid var(--gold, #C9A84C) !important;
-    border-radius: 50% !important;
-    position: fixed !important;
-    pointer-events: none !important;
-    z-index: 99998 !important;
-    transform: translate(-50%, -50%) !important;
-    transition: width 0.2s, height 0.2s !important;
-    background: transparent !important;
-    mix-blend-mode: normal !important;
-  }
-  #gic-cursor-dot, .gic-cursor-dot {
-    display: block !important;
-    width: 4px !important;
-    height: 4px !important;
-    background: var(--gold, #C9A84C) !important;
-    border-radius: 50% !important;
-    position: fixed !important;
-    pointer-events: none !important;
-    z-index: 99998 !important;
-    transform: translate(-50%, -50%) !important;
-  }
 }
 
 /* Hide the loading spinner circle that appears as empty ring */
