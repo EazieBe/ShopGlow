@@ -66,8 +66,8 @@
           "collection_LejHhq": {
             "type": "collection",
             "settings": {
-              "collection": "",
-              "label": "Clothing",
+              "collection": "ed-hardy",
+              "label": "Ed Hardey",
               "sublabel": "Shop Now",
               "emoji": "👜",
               "bg_gradient": "linear-gradient(135deg,#FCE4EC,#F8BBD9)"
@@ -90,7 +90,7 @@
           "collection_TDRyVL"
         ],
         "settings": {
-          "eyebrow": "Shop by Category",
+          "eyebrow": "",
           "title_plain": "Find Your",
           "title_glow": "Glow"
         }
