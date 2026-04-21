@@ -1,63 +1,33 @@
 <div class="gic-product-page">
-
-  <!-- Gallery: thumbnails sidebar + main image -->
   <div class="product-gallery">
-    {%- if product.images.size > 1 -%}
-      <div class="gallery-thumbs">
-        {%- for image in product.images limit: 5 -%}
-          <div class="gallery-thumb {% if forloop.first %}active{% endif %}"
-               data-src="{{ image | image_url: width: 900 }}">
-            <img src="{{ image | image_url: width: 160 }}"
-                 alt="{{ image.alt | escape }}"
-                 loading="lazy">
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
-    <div class="gallery-main">
-      {%- if product.featured_image -%}
-        <img src="{{ product.featured_image | image_url: width: 900 }}"
-             alt="{{ product.featured_image.alt | escape }}"
-             loading="eager">
-      {%- else -%}
-        🛍
-      {%- endif -%}
-    </div>
+    {%- for image in product.images -%}
+      <img src="{{ image | image_url: width: 800 }}" alt="{{ image.alt | escape }}" class="product-img-thumb {% if forloop.first %}active{% endif %}" loading="lazy">
+    {%- endfor -%}
   </div>
 
-  <!-- Product Info -->
-  <div class="product-info-col">
-
-    <a href="{{ product.vendor | url_for_vendor }}" class="product-vendor-link">
-      {{ product.vendor }}
-    </a>
-
-    <h1 class="product-title-main">{{ product.title }}</h1>
+  <div class="product-details">
+    <div class="prod-brand">{{ product.vendor }}</div>
+    <h1 class="product-title">{{ product.title }}</h1>
 
     <div class="product-price-row">
-      <span class="product-price-now">{{ product.price | money }}</span>
+      <span class="price-big">{{ product.price | money }}</span>
       {%- if product.compare_at_price > product.price -%}
-        <span class="product-price-was">{{ product.compare_at_price | money }}</span>
-        <span class="product-price-save">
-          Save {{ product.compare_at_price | minus: product.price | money }}
-        </span>
+        <span class="price-was">{{ product.compare_at_price | money }}</span>
+        <span class="price-save">Save {{ product.compare_at_price | minus: product.price | money }}</span>
       {%- endif -%}
     </div>
 
-    {%- form 'product', product -%}
+    <div class="product-description">{{ product.description }}</div>
 
+    {%- form 'product', product -%}
       {%- unless product.has_only_default_variant -%}
         {%- for option in product.options_with_values -%}
-          <div class="variant-section">
-            <div class="variant-heading">{{ option.name }}</div>
-            <div class="variant-pills">
+          <div class="variant-group">
+            <label class="variant-label">{{ option.name }}</label>
+            <div class="variant-options">
               {%- for value in option.values -%}
-                <label>
-                  <input type="radio"
-                         class="variant-pill"
-                         name="options[{{ option.name | escape }}]"
-                         value="{{ value | escape }}"
-                         {% if option.selected_value == value %}checked{% endif %}>
+                <label class="variant-opt">
+                  <input type="radio" name="options[{{ option.name | escape }}]" value="{{ value | escape }}" {% if option.selected_value == value %}checked{% endif %}>
                   <span>{{ value }}</span>
                 </label>
               {%- endfor -%}
@@ -68,37 +38,19 @@
 
       <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
-      <div class="product-buy-row">
-        <button type="submit"
-                class="btn-add-cart"
-                {% unless product.available %}disabled{% endunless %}>
-          {%- if product.available -%}Add ✦{%- else -%}Sold Out{%- endif -%}
+      <div class="product-actions">
+        <button type="submit" class="btn-primary btn-full" {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}Add to Cart 🛍{%- else -%}Sold Out{%- endif -%}
         </button>
-        <button type="button"
-                class="btn-wishlist-main pwish"
-                aria-label="Save to wishlist">♡</button>
       </div>
-
     {%- endform -%}
 
-    <div class="product-trust-row">
-      <div class="product-trust-item">✅ Authenticated &amp; verified</div>
-      <div class="product-trust-item">🚚 Free shipping on orders $75+</div>
-      <div class="product-trust-item">↩️ 14-day returns on new items</div>
-      <div class="product-trust-item">💜 Personally curated by Glo</div>
+    <div class="product-trust">
+      <div class="trust-item">✅ Authenticated & verified</div>
+      <div class="trust-item">🚚 Free shipping on orders $75+</div>
+      <div class="trust-item">↩️ 14-day returns on new items</div>
+      <div class="trust-item">💜 Personally curated by Glo</div>
     </div>
-
-    <div class="tab-headers">
-      <button class="tab-btn active" data-tab="desc">Description</button>
-      <button class="tab-btn" data-tab="shipping">Shipping</button>
-    </div>
-    <div class="tab-content active" data-tab="desc">
-      {{ product.description }}
-    </div>
-    <div class="tab-content" data-tab="shipping">
-      <p>Free shipping on orders over $75. Standard shipping 3–7 business days. 14-day returns on new items.</p>
-    </div>
-
   </div>
 </div>
 
