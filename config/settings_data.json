@@ -10,6 +10,7 @@
 {
   "current": {
     "logo": "shopify://shop_images/GlowingInCoach-logo-transparent.png",
+    "logo_width": 60,
     "favicon": "shopify://shop_images/GlowingInCoach-logo-transparent.png",
     "color_primary": "#C9A84C",
     "color_secondary": "#F0D080",
@@ -33,8 +34,9 @@
         "settings": {
           "badge_text": "✨ Posh Ambassador · 16.5K Followers · 5★ Rated",
           "heading_line1": "Vintage Coach Bags &",
-          "heading_glow": "Designer Finds",
           "heading_line2": "that make you Glow.",
+          "heading_line3": "that make you",
+          "heading_glow": "Designer Finds",
           "subtext": "Authenticated vintage Coach bags, designer handbags & boutique fashion — handpicked with love by Glo.",
           "btn1_text": "Shop Now 🛍",
           "btn1_url": "",
@@ -76,7 +78,7 @@
           "collection_TDRyVL": {
             "type": "collection",
             "settings": {
-              "collection": "",
+              "collection": "the-nightmare-before-christmas",
               "label": "The Nightmare Before Christmas",
               "sublabel": "Shop Now",
               "emoji": "👜",
